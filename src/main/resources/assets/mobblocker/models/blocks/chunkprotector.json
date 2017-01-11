@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "up": "mobblocker:blocks/chunkProtectorBlank",
+    "down": "mobblocker:blocks/chunkProtectorBlank",
+    "north": "mobblocker:blocks/chunkProtectorNorth",
+    "south": "mobblocker:blocks/chunkProtectorSouth",
+    "east": "mobblocker:blocks/chunkProtectorEast",
+    "west": "mobblocker:blocks/chunkProtectorWest"
+  }
+}

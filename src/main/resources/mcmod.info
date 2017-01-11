@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mobblocker",
+  "name": "Mob Blocker",
+  "description": "placeholder",
+  "version": "${version}",
+  "mcversion": "1.11.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["maxwell-lt"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
