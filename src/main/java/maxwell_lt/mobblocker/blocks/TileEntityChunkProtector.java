@@ -22,18 +22,28 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	@Override
 	public void update() {
 		tickCounter++;
-		
-		// Gets bounding box of chunk
-		ChunkPos chunk = world.getChunkFromChunkCoords(getPos().getX(), getPos().getY()).getPos();
+		if (world.isRemote) {
+			// Gets bounding box of chunk
 			
-		AxisAlignedBB chunkBounds = new AxisAlignedBB(new BlockPos(chunk.getXStart(), 0, chunk.getZStart()), new BlockPos(chunk.getXEnd(), 256, chunk.getZEnd()));
-		
-		List<EntityLivingBase> list =  world.getEntitiesWithinAABB(EntityLivingBase.class, chunkBounds);
-		MobBlocker.logger.debug("update() called");	
-		MobBlocker.logger.debug(chunkBounds.toString());
 			
-		for (EntityLivingBase entity : list) {
-			MobBlocker.logger.debug(entity.getClass().toString());
+			
+			AxisAlignedBB chunkBounds = getChunk(getPos());
+			MobBlocker.logger.info(chunkBounds.toString());
+		
+			List<EntityLivingBase> list =  world.getEntitiesWithinAABB(EntityLivingBase.class, chunkBounds);
+			
+			for (EntityLivingBase entity : list) {
+				MobBlocker.logger.error("Entity:");
+				MobBlocker.logger.error(entity.getClass().toString());
+			}
 		}
+	}
+	
+	private AxisAlignedBB getChunk(BlockPos blockpos) {
+		return new AxisAlignedBB((blockpos.getX() / 16) * 16, 0,
+				(blockpos.getZ() / 16) * 16,
+				((blockpos.getX() / 16) * 16) + 16, 256,
+				((blockpos.getZ() / 16) * 16) + 16);
+		
 	}
 }
