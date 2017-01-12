@@ -19,3 +19,6 @@ bin/
 run/
 eclipse/
 gradle/
+.gradle/
+.metadata/
+.settings/
