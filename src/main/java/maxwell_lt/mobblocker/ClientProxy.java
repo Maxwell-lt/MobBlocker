@@ -7,6 +7,6 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
         // Typically initialization of models and such goes here:
-        //ModRenderers.preInit();
+        ModBlocks.initClient();
     }
 }
