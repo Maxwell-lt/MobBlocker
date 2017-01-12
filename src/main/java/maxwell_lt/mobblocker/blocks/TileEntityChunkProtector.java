@@ -1,23 +1,24 @@
 package maxwell_lt.mobblocker.blocks;
 
 import java.util.List;
+import java.util.Random;
 
-import akka.event.Logging;
 import maxwell_lt.mobblocker.MobBlocker;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 
 public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	
+	int tickCounter = 0;
+	Random rand;
+	
 	public TileEntityChunkProtector() {
 		super();
+		this.rand = new Random();
 	}
-
-	int tickCounter = 0;
 	
 	@Override
 	public void update() {
@@ -28,13 +29,23 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			
 			
 			AxisAlignedBB chunkBounds = getChunk(getPos());
-			MobBlocker.logger.info(chunkBounds.toString());
 		
-			List<EntityLivingBase> list =  world.getEntitiesWithinAABB(EntityLivingBase.class, chunkBounds);
+			List<EntityMob> list =  world.getEntitiesWithinAABB(EntityMob.class, chunkBounds);
 			
-			for (EntityLivingBase entity : list) {
-				MobBlocker.logger.error("Entity:");
-				MobBlocker.logger.error(entity.getClass().toString());
+			for (EntityMob entity : list) {
+				boolean moved = false;
+				int counter = 0;
+				while (!moved) {
+					counter++;
+					if (counter > 10) break;
+					double nX = entity.posX + (this.rand.nextDouble() - 5.0D) * 64.0D;
+					double nY = entity.posY + (double)(this.rand.nextInt(64) - 32);
+					double nZ = entity.posZ + (this.rand.nextDouble() - 5.0D) * 64.0D;
+					world.getTopSolidOrLiquidBlock(new BlockPos(nX, nY, nZ));
+					moved = entity.attemptTeleport(nX, world.getTopSolidOrLiquidBlock(new BlockPos(nX, nY, nZ)).getY(), nZ);
+					MobBlocker.logger.info("Counter: " + counter);
+					MobBlocker.logger.info("X: " + nX + "Y: " + nY + "Z: " + nZ);
+				}
 			}
 		}
 	}
