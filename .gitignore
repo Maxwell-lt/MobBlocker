@@ -15,3 +15,7 @@ hs_err_pid*
 /Forge_Client.launch
 /Forge_Server.launch
 /gradle.properties
+bin/
+run/
+eclipse/
+gradle/
