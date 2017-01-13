@@ -22,7 +22,6 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	
 	@Override
 	public void update() {
-		tickCounter++;
 		if (world.isRemote) {
 			// Gets bounding box of chunk
 			
@@ -38,13 +37,15 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 				while (!moved) {
 					counter++;
 					if (counter > 10) break;
-					double nX = entity.posX + (this.rand.nextDouble() - 5.0D) * 64.0D;
-					double nY = entity.posY + (double)(this.rand.nextInt(64) - 32);
-					double nZ = entity.posZ + (this.rand.nextDouble() - 5.0D) * 64.0D;
-					world.getTopSolidOrLiquidBlock(new BlockPos(nX, nY, nZ));
-					moved = entity.attemptTeleport(nX, world.getTopSolidOrLiquidBlock(new BlockPos(nX, nY, nZ)).getY(), nZ);
+					double newX = entity.posX + (this.rand.nextDouble() - 5.0D) * 64.0D;
+					double newY = entity.posY + (double)(this.rand.nextInt(64) - 32);
+					double newZ = entity.posZ + (this.rand.nextDouble() - 5.0D) * 64.0D;
+					moved = entity.attemptTeleport(newX, newY, newZ);
+					
+					//Debug:
+					MobBlocker.logger.info(world.getTopSolidOrLiquidBlock(new BlockPos(newX, newY, newZ)));
 					MobBlocker.logger.info("Counter: " + counter);
-					MobBlocker.logger.info("X: " + nX + "Y: " + nY + "Z: " + nZ);
+					MobBlocker.logger.info("X: " + newX + " Y: " + newY + " Z: " + newZ);
 				}
 			}
 		}
