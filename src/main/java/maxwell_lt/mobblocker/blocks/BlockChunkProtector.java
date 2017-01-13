@@ -8,8 +8,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -23,7 +21,6 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
         setUnlocalizedName(MobBlocker.MODID + ".chunkprotector");
         setRegistryName("chunkprotector");
         setHardness(1.5F);
-        setLightLevel(15 / 16F);
         GameRegistry.register(this);
         GameRegistry.register(new ItemBlock(this), getRegistryName());
         GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
@@ -40,8 +37,5 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
 		return new TileEntityChunkProtector();
 	}
 	
-	private TileEntityChunkProtector getTE(IBlockAccess world, BlockPos pos) {
-        return (TileEntityChunkProtector) world.getTileEntity(pos);
-	}
 	
 }
