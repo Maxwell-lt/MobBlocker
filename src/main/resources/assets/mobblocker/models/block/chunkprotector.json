@@ -6,6 +6,7 @@
     "north": "mobblocker:blocks/chunkprotectornorth",
     "south": "mobblocker:blocks/chunkprotectorsouth",
     "east": "mobblocker:blocks/chunkprotectoreast",
-    "west": "mobblocker:blocks/chunkprotectorwest"
+    "west": "mobblocker:blocks/chunkprotectorwest",
+    "particle": "mobblocker:blocks/chunkprotectorblank"
   }
 }

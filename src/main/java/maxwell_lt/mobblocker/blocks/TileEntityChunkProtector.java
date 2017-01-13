@@ -2,7 +2,6 @@ package maxwell_lt.mobblocker.blocks;
 
 import java.util.List;
 import java.util.Random;
-
 import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityWitch;
@@ -27,16 +26,18 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	public void update() {
 		
 		if (!world.isRemote) {
-			teleportMobs();
-			killArrows();
-			killPotions();
+			AxisAlignedBB chunkBounds = getChunk(getPos());
+			
+			teleportMobs(chunkBounds);
+			killArrows(chunkBounds);
+			killPotions(chunkBounds);
+			calmAngryWolves(chunkBounds);
 		}
 	}
 	
 	// Teleports every hostile mob in the chunk like endermen.
-	private void teleportMobs() {
-		
-		AxisAlignedBB chunkBounds = getChunk(getPos());
+	private void teleportMobs(AxisAlignedBB chunkBounds) {
+
 		
 		// Gets a list of all the entities in the same chunk as this block
 		List<EntityMob> list =  world.getEntitiesWithinAABB(EntityMob.class, chunkBounds);
@@ -61,8 +62,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		}
 	}
 	
-	private void killArrows() {
-		AxisAlignedBB chunkBounds = getChunk(getPos());
+	private void killArrows(AxisAlignedBB chunkBounds) {
 		List<EntityArrow> list =  world.getEntitiesWithinAABB(EntityArrow.class, chunkBounds);
 		for (EntityArrow arrow : list) {
 			if (arrow.shootingEntity instanceof AbstractSkeleton) {
@@ -76,14 +76,26 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		}
 	}
 	
-	private void killPotions() {
-		AxisAlignedBB chunkBounds = getChunk(getPos());
+	private void killPotions(AxisAlignedBB chunkBounds) {
 		List<EntityPotion> list =  world.getEntitiesWithinAABB(EntityPotion.class, chunkBounds);
 		for (EntityPotion potion : list) {
 			if (potion.getThrower() instanceof EntityWitch) {
 				potion.setDead();
 			}
 		}
+	}
+	
+	private void calmAngryWolves(AxisAlignedBB chunkBounds) {
+		/*
+		List<EntityWolf> list =  world.getEntitiesWithinAABB(EntityWolf.class, chunkBounds);
+		for (EntityWolf wolf : list) {
+			if (wolf.isAngry()) {
+				wolf.setAttackTarget(null);
+				wolf.setRevengeTarget(null);
+				wolf.setAngry(false);
+			}
+		}
+		*/
 	}
 	
 	// Returns an AxisAlignedBB that surrounds the entire chunk a given BlockPos is in.
