@@ -25,7 +25,7 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
         super(Material.ROCK);
         setUnlocalizedName(MobBlocker.MODID + ".chunkprotector");
         setRegistryName("chunkprotector");
-        setHardness(1.5F);
+        setBlockUnbreakable();
         GameRegistry.register(this);
         GameRegistry.register(new ItemBlock(this), getRegistryName());
         GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");

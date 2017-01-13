@@ -18,23 +18,45 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	// Used to get random teleportation coords:
 	Random rand;
 	
+	int ticksInWorld;
+	int ticksBeforeDestroyed = 720; // 72000 = 1 IRL hour
+	
+	AxisAlignedBB chunkBounds;
+	
 	public TileEntityChunkProtector() {
 		super();
 		this.rand = new Random();
+		
+		this.ticksInWorld = 0;
+		
+		this.chunkBounds = getChunk(getPos());
 	}
 	
 	@Override
 	public void update() {
 		
 		if (!world.isRemote) {
-			AxisAlignedBB chunkBounds = getChunk(getPos());
-			
 			teleportMobs(chunkBounds);
 			killArrows(chunkBounds);
 			killPotions(chunkBounds);
 			calmAngryWolves(chunkBounds);
+			
+			// Set metadata
+			this.ticksInWorld++;
+			
+			if (ticksInWorld <= ticksBeforeDestroyed * 0.3F) {
+				//set metadata to 0
+			} else if (ticksInWorld > ticksBeforeDestroyed * 0.3F && ticksInWorld <= ticksBeforeDestroyed * 0.7F) {
+				//set metadata to 1
+			} else if (ticksInWorld > ticksBeforeDestroyed * 0.7F && ticksInWorld < ticksBeforeDestroyed) {
+				//set metadata to 2
+			} else {
+				world.setBlockToAir(getPos());
+			}
+			
 		}
 	}
+	
 	
 	// Teleports every hostile mob in the chunk like endermen.
 	private void teleportMobs(AxisAlignedBB chunkBounds) {
