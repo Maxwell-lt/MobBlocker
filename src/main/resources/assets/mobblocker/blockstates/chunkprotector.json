@@ -4,7 +4,18 @@
     "model": "mobblocker:chunkprotector"
   },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "decay": {
+    	0: {
+    		"model": "mobblocker:chunkprotector"
+    	},
+    	
+    	1: {
+    		"model": "mobblocker:chunkprotectordecay1"
+    	},
+    	
+    	2: {
+    		"model": "mobblocker:chunkprotectordecay2"
+    	}
+    }
   }
 }

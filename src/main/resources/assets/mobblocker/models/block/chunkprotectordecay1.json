@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "up": "mobblocker:blocks/chunkprotectorblankdecay1",
+    "down": "mobblocker:blocks/chunkprotectorblankdecay1",
+    "north": "mobblocker:blocks/chunkprotectornorthdecay1",
+    "south": "mobblocker:blocks/chunkprotectorsouthdecay1",
+    "east": "mobblocker:blocks/chunkprotectoreastdecay1",
+    "west": "mobblocker:blocks/chunkprotectorwestdecay1",
+    "particle": "mobblocker:blocks/chunkprotectorblankdecay1"
+  }
+}
