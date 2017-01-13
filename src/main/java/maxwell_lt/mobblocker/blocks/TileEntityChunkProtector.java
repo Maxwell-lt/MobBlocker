@@ -37,16 +37,17 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 				while (!moved) {
 					counter++;
 					if (counter > 10) break;
-					double newX = entity.posX + (this.rand.nextDouble() - 5.0D) * 64.0D;
+					double newX = entity.posX + (this.rand.nextDouble() - 0.5D) * 64.0D;
 					double newY = entity.posY + (double)(this.rand.nextInt(64) - 32);
-					double newZ = entity.posZ + (this.rand.nextDouble() - 5.0D) * 64.0D;
-					moved = entity.attemptTeleport(newX, newY, newZ);
+					double newZ = entity.posZ + (this.rand.nextDouble() - 0.5D) * 64.0D;
+					moved = entity.attemptTeleport(newX, world.getTopSolidOrLiquidBlock(new BlockPos(newX, newY, newZ)).getY(), newZ);
 					
 					//Debug:
 					MobBlocker.logger.info(world.getTopSolidOrLiquidBlock(new BlockPos(newX, newY, newZ)));
 					MobBlocker.logger.info("Counter: " + counter);
 					MobBlocker.logger.info("X: " + newX + " Y: " + newY + " Z: " + newZ);
 				}
+				list.remove(entity);
 			}
 		}
 	}
