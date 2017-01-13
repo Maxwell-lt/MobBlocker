@@ -22,7 +22,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	
 	@Override
 	public void update() {
-		if (world.isRemote) {
+		if (!world.isRemote) {
 			// Gets bounding box of chunk
 			
 			
@@ -47,7 +47,6 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 					MobBlocker.logger.info("Counter: " + counter);
 					MobBlocker.logger.info("X: " + newX + " Y: " + newY + " Z: " + newZ);
 				}
-				list.remove(entity);
 			}
 		}
 	}
