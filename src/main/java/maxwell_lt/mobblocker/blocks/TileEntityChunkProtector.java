@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.tileentity.TileEntity;
@@ -86,7 +87,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	}
 	
 	private void calmAngryWolves(AxisAlignedBB chunkBounds) {
-		/*
+		// Currently broken, only the helper wolves are calmed.
 		List<EntityWolf> list =  world.getEntitiesWithinAABB(EntityWolf.class, chunkBounds);
 		for (EntityWolf wolf : list) {
 			if (wolf.isAngry()) {
@@ -95,7 +96,6 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 				wolf.setAngry(false);
 			}
 		}
-		*/
 	}
 	
 	// Returns an AxisAlignedBB that surrounds the entire chunk a given BlockPos is in.
