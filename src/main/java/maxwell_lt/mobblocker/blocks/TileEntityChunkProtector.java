@@ -42,11 +42,11 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		if (!world.isRemote) {
 			AxisAlignedBB chunkBounds = getChunk(getPos());
 			
-			teleportMobs(chunkBounds);
-			teleportSlimes(chunkBounds);
-			killArrows(chunkBounds);
-			killPotions(chunkBounds);
-			calmAngryWolves(chunkBounds);
+			if (Config.enableMobProtection) teleportMobs(chunkBounds);
+			if (Config.enableSlimeProtection) teleportSlimes(chunkBounds);
+			if (Config.enableArrowProtection) killArrows(chunkBounds);
+			if (Config.enablePotionProtection) killPotions(chunkBounds);
+			if (Config.enableWolfProtection) calmAngryWolves(chunkBounds);
 			
 			// Set metadata
 			this.ticksInWorld++;
@@ -106,6 +106,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		}
 	}
 	
+	// BROKEN
 	private void calmAngryWolves(AxisAlignedBB chunkBounds) {
 		// Currently broken, only the helper wolves are calmed.
 		List<EntityWolf> list =  world.getEntitiesWithinAABB(EntityWolf.class, chunkBounds);
