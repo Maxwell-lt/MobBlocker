@@ -12,7 +12,7 @@ public class LoginEventHandler {
 	
 	@SubscribeEvent
 	public void onPlayerJoinWorld(EntityJoinWorldEvent event) {
-		if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer) {
+		if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer && Config.giveNewPlayersProtector) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			NBTTagCompound persistentTag;
 			if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {

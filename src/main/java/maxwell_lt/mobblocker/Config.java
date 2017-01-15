@@ -17,11 +17,14 @@ public class Config {
 	public static boolean enableWolfProtection = false;
 	public static boolean enableSlimeProtection = true;
 	
+	public static boolean giveNewPlayersProtector = true;
+	
 	public static void readConfig() {
 		Configuration cfg = CommonProxy.config;
 		try {
 			cfg.load();
 			initGeneralConfig(cfg);
+			initProtectionConfig(cfg);
 		} catch (Exception exception) {
 			MobBlocker.logger.log(Level.ERROR, "Problem loading config file!", exception);
 		} finally {
@@ -35,9 +38,13 @@ public class Config {
         cfg.addCustomCategoryComment(CATEGORY_GENERAL, "General configuration");
         ticksToLive = cfg.getInt("ticksbeforedecay", CATEGORY_GENERAL, ticksToLive, -1, 4320000,
         		"How long (in ticks) before the block decays. Set to -1 to disable decay.");
-        
-        
-        enableMobProtection = cfg.getBoolean("enablemobprotection", CATEGORY_PROTECTION, true,
+        giveNewPlayersProtector = cfg.getBoolean("givenewplayerschunkprotector", CATEGORY_GENERAL, true,
+        		"Set to true to give players a free Chunk Protector when first logging into a world.");
+    }
+	private static void initProtectionConfig(Configuration cfg) {
+		cfg.addCustomCategoryComment(CATEGORY_PROTECTION, "Protection configuration");
+		
+		enableMobProtection = cfg.getBoolean("enablemobprotection", CATEGORY_PROTECTION, true,
         		"Set to false to disable teleporting hostile mobs out of the protected area.");
         enableArrowProtection = cfg.getBoolean("enablearrowprotection", CATEGORY_PROTECTION, true,
         			"Set to false to disable killing Skeleton arrows shot into the protected area.");
@@ -47,5 +54,5 @@ public class Config {
         			"Set to false to disable calming hostile wolves in the protected area.");
         enableSlimeProtection = cfg.getBoolean("enableslimeprotection", CATEGORY_PROTECTION, true,
         			"Set to false to disable teleporting slimes out of the protected area.");
-    }	
+	}
 }
