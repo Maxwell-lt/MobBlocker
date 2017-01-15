@@ -1,5 +1,6 @@
 package maxwell_lt.mobblocker.blocks;
 
+import maxwell_lt.mobblocker.Config;
 import maxwell_lt.mobblocker.MobBlocker;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -25,7 +26,11 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
         super(Material.ROCK);
         setUnlocalizedName(MobBlocker.MODID + ".chunkprotector");
         setRegistryName("chunkprotector");
-        setBlockUnbreakable();
+        if (Config.ticksToLive != -1) setBlockUnbreakable();
+        else {
+        	setHardness(1.5F);
+        	setResistance(18000000);
+        }
         GameRegistry.register(this);
         GameRegistry.register(new ItemBlock(this), getRegistryName());
         GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
