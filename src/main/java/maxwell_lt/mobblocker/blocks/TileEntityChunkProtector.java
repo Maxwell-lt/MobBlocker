@@ -3,6 +3,7 @@ package maxwell_lt.mobblocker.blocks;
 import java.util.List;
 import java.util.Random;
 
+import maxwell_lt.mobblocker.Config;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.monster.EntityMob;
@@ -22,7 +23,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	Random rand;
 	
 	int ticksInWorld;
-	int ticksBeforeDestroyed = 72000; // 72000 = 1 IRL hour
+	int ticksBeforeDestroyed;
 	
 	
 	public TileEntityChunkProtector() {
@@ -30,6 +31,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		this.rand = new Random();
 		
 		this.ticksInWorld = 0;
+		this.ticksBeforeDestroyed = Config.ticksToLive;
 	}
 	
 	@Override
@@ -45,16 +47,17 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			
 			// Set metadata
 			this.ticksInWorld++;
-			if (ticksInWorld <= ticksBeforeDestroyed * 0.3F) {
-				world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
-			} else if (ticksInWorld > ticksBeforeDestroyed * 0.3F && ticksInWorld <= ticksBeforeDestroyed * 0.7F) {
-				world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 1));
-			} else if (ticksInWorld > ticksBeforeDestroyed * 0.7F && ticksInWorld < ticksBeforeDestroyed) {
-				world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 2));
-			} else {
-				world.setBlockToAir(getPos());
-			}
-			
+			if (ticksBeforeDestroyed != -1) {
+				if (ticksInWorld <= ticksBeforeDestroyed * 0.3F) {
+					world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
+				} else if (ticksInWorld > ticksBeforeDestroyed * 0.3F && ticksInWorld <= ticksBeforeDestroyed * 0.7F) {
+					world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 1));
+				} else if (ticksInWorld > ticksBeforeDestroyed * 0.7F && ticksInWorld < ticksBeforeDestroyed) {
+					world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 2));
+				} else {
+					world.setBlockToAir(getPos());
+				}
+			} else world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
 		}
 	}
 	
