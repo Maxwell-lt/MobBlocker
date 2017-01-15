@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.monster.AbstractSkeleton;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityWolf;
@@ -88,7 +88,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	private void killArrows(AxisAlignedBB chunkBounds) {
 		List<EntityArrow> list =  world.getEntitiesWithinAABB(EntityArrow.class, chunkBounds);
 		for (EntityArrow arrow : list) {
-			if (arrow.shootingEntity instanceof AbstractSkeleton) {
+			if (arrow.shootingEntity instanceof IRangedAttackMob) {
 				if (arrow.isBurning()) { 
 					arrow.setDead();
 				} else {

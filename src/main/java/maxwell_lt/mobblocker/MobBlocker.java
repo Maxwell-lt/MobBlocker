@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = MobBlocker.MODID, name = MobBlocker.MODNAME, version = MobBlocker.MODVERSION, useMetadata = true)
+@Mod(modid = MobBlocker.MODID, name = MobBlocker.MODNAME, version = MobBlocker.MODVERSION, useMetadata = true, acceptedMinecraftVersions = "[1.10,1.11.2]")
 public class MobBlocker {
 
     public static final String MODID = "mobblocker";
