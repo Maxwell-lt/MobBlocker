@@ -1,18 +1,20 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/mob-blocker/files",
   "1.10.2": {
+    "1.0.0": "Fixed #8",
     "1.0.0rc1.1": "Fixed #12",
     "1.0.0rc1": "Implemented configuration for the decay time of a Chunk Protector", 
     "0.1.0b": "Backported to 1.10.2"
   },
   "1.11.2" : {
+    "1.0.0": "Fixed #8",
     "1.0.0rc1.1": "Fixed #12",
     "1.0.0rc1": "Implemented configuration for the decay time of a Chunk Protector", 
     "0.1.0b": "Backported to 1.10.2",
     "0.0.0b": "Initial release"
   },
   "promos": {
-    "1.11.2-latest": "1.0.0rc1.1",
-    "1.10.2-latest": "1.0.0rc1.1"
+    "1.11.2-latest": "1.0.0",
+    "1.10.2-latest": "1.0.0"
   }
 }
