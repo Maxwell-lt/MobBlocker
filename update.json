@@ -1,5 +1,5 @@
 {
-  "homepage": "https://minecraft.curseforge.com/projects/mob-blocker",
+  "homepage": "https://minecraft.curseforge.com/projects/mob-blocker/files",
   "1.10.2": {
     "1.0.0rc1": "Implemented configuration for the decay time of a Chunk Protector", 
     "0.1.0b": "Backported to 1.10.2"
