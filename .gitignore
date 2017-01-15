@@ -22,3 +22,5 @@ gradle/
 .gradle/
 .metadata/
 .settings/
+build/
+!releases/*.jar

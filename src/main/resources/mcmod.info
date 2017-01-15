@@ -2,8 +2,8 @@
 {
   "modid": "mobblocker",
   "name": "Mob Blocker",
-  "description": "Allows each player to protect a single chunk from hostile mobs, to help out in the first few nights.",
-  "version": "1.11.2-alpha0",
+  "description": "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights.",
+  "version": "1.11.2-0.0.0b",
   "mcversion": "1.11.2",
   "url": "https://www.github.com/Maxwell-lt/MobBlocker",
   "updateUrl": "",

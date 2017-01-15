@@ -24,21 +24,20 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	int ticksInWorld;
 	int ticksBeforeDestroyed = 72000; // 72000 = 1 IRL hour
 	
-	AxisAlignedBB chunkBounds;
 	
 	public TileEntityChunkProtector() {
 		super();
 		this.rand = new Random();
 		
 		this.ticksInWorld = 0;
-		
-		this.chunkBounds = getChunk(getPos());
 	}
 	
 	@Override
 	public void update() {
 		
 		if (!world.isRemote) {
+			AxisAlignedBB chunkBounds = getChunk(getPos());
+			
 			teleportMobs(chunkBounds);
 			killArrows(chunkBounds);
 			killPotions(chunkBounds);
@@ -63,7 +62,6 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	// Teleports every hostile mob in the chunk like endermen.
 	private void teleportMobs(AxisAlignedBB chunkBounds) {
 
-		
 		// Gets a list of all the entities in the same chunk as this block
 		List<EntityMob> list =  world.getEntitiesWithinAABB(EntityMob.class, chunkBounds);
 		
