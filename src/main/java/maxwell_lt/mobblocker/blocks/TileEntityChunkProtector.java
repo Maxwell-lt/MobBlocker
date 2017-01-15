@@ -5,8 +5,10 @@ import java.util.Random;
 
 import maxwell_lt.mobblocker.Config;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -41,6 +43,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			AxisAlignedBB chunkBounds = getChunk(getPos());
 			
 			teleportMobs(chunkBounds);
+			teleportSlimes(chunkBounds);
 			killArrows(chunkBounds);
 			killPotions(chunkBounds);
 			calmAngryWolves(chunkBounds);
@@ -66,25 +69,17 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	private void teleportMobs(AxisAlignedBB chunkBounds) {
 
 		// Gets a list of all the entities in the same chunk as this block
-		List<EntityMob> list =  world.getEntitiesWithinAABB(EntityMob.class, chunkBounds);
+		List<EntityMob> entityMobList =  world.getEntitiesWithinAABB(EntityMob.class, chunkBounds);
 		
-		for (EntityMob entity : list) {
-			boolean moved = false; 	// Stores the status of teleportation attempts.
-			int counter = 0;		// Used to prevent infinite loops.
-			while (!moved) {
-				counter++;
-				if (counter > 10) break; // Breaks out of a possible infinite loop.
-				
-				// Implementation of Enderman random teleport code:
-				double newX = entity.posX + (this.rand.nextDouble() - 0.5D) * 64.0D;
-				double newY = entity.posY + (double)(this.rand.nextInt(64) - 32);
-				double newZ = entity.posZ + (this.rand.nextDouble() - 0.5D) * 64.0D;
-				moved = entity.attemptTeleport(newX, world.getTopSolidOrLiquidBlock(new BlockPos(newX, newY, newZ)).getY(), newZ);
-			}
-			
-			// Reset loop controllers:
-			counter = 0;
-			moved = false;
+		for (EntityMob entity : entityMobList) {
+			teleport(entity);
+		}
+	}
+	
+	private void teleportSlimes(AxisAlignedBB chunkBounds) {
+		List<EntitySlime> entitySlimeList = world.getEntitiesWithinAABB(EntitySlime.class, chunkBounds);
+		for (EntitySlime entity : entitySlimeList) {
+			teleport(entity);
 		}
 	}
 	
@@ -121,6 +116,25 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 				wolf.setAngry(false);
 			}
 		}
+	}
+	
+	private void teleport(EntityLivingBase entity) {
+		boolean moved = false; 	// Stores the status of teleportation attempts.
+		int counter = 0;		// Used to prevent infinite loops.
+		while (!moved) {
+			counter++;
+			if (counter > 10) break; // Breaks out of a possible infinite loop.
+			
+			// Implementation of Enderman random teleport code:
+			double newX = entity.posX + (this.rand.nextDouble() - 0.5D) * 64.0D;
+			double newY = entity.posY + (double)(this.rand.nextInt(64) - 32);
+			double newZ = entity.posZ + (this.rand.nextDouble() - 0.5D) * 64.0D;
+			moved = entity.attemptTeleport(newX, world.getTopSolidOrLiquidBlock(new BlockPos(newX, newY, newZ)).getY(), newZ);
+		}
+		
+		// Reset loop controllers:
+		counter = 0;
+		moved = false;
 	}
 	
 	// Returns an AxisAlignedBB that surrounds the entire chunk a given BlockPos is in.
