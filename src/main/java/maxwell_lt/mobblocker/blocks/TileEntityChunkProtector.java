@@ -2,6 +2,8 @@ package maxwell_lt.mobblocker.blocks;
 
 import java.util.List;
 import java.util.Random;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityWitch;
@@ -12,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	
@@ -19,7 +22,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	Random rand;
 	
 	int ticksInWorld;
-	int ticksBeforeDestroyed = 720; // 72000 = 1 IRL hour
+	int ticksBeforeDestroyed = 72000; // 72000 = 1 IRL hour
 	
 	AxisAlignedBB chunkBounds;
 	
@@ -43,13 +46,12 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			
 			// Set metadata
 			this.ticksInWorld++;
-			
 			if (ticksInWorld <= ticksBeforeDestroyed * 0.3F) {
-				//set metadata to 0
+				world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
 			} else if (ticksInWorld > ticksBeforeDestroyed * 0.3F && ticksInWorld <= ticksBeforeDestroyed * 0.7F) {
-				//set metadata to 1
+				world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 1));
 			} else if (ticksInWorld > ticksBeforeDestroyed * 0.7F && ticksInWorld < ticksBeforeDestroyed) {
-				//set metadata to 2
+				world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 2));
 			} else {
 				world.setBlockToAir(getPos());
 			}
@@ -127,5 +129,11 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 				(blockpos.getX() & ~0xF) + 16, 256,
 				(blockpos.getZ() & ~0xF) + 16);
 		
+	}
+	
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+	{
+	    return (oldState.getBlock() != newState.getBlock());
 	}
 }
