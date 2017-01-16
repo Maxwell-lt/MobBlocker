@@ -8,6 +8,7 @@ public class Config {
 	
 	private static final String CATEGORY_GENERAL = "general";
 	private static final String CATEGORY_PROTECTION = "protection";
+	private static final String CATEGORY_AREAPROTECTOR = "areaprotector";
 	
 	public static int ticksToLive = 72000;
 	
@@ -19,12 +20,25 @@ public class Config {
 	
 	public static boolean giveNewPlayersProtector = true;
 	
+	public static int areaProtectorX = 5;
+	public static int areaProtectorY = 5;
+	public static int areaProtectorZ = 5;
+	
+	public static boolean enableMobProtectionAreaProtector = true;
+	public static boolean enableArrowProtectionAreaProtector = true;
+	public static boolean enablePotionProtectionAreaProtector = true;
+	public static boolean enableWolfProtectionAreaProtector = false;
+	public static boolean enableSlimeProtectionAreaProtector = true;
+	
+	public static boolean enableAreaProtectorRecipe = true;
+	
 	public static void readConfig() {
 		Configuration cfg = CommonProxy.config;
 		try {
 			cfg.load();
 			initGeneralConfig(cfg);
 			initProtectionConfig(cfg);
+			initAreaProtConfig(cfg);
 		} catch (Exception exception) {
 			MobBlocker.logger.log(Level.ERROR, "Problem loading config file!", exception);
 		} finally {
@@ -36,13 +50,14 @@ public class Config {
 	
 	private static void initGeneralConfig(Configuration cfg) {
         cfg.addCustomCategoryComment(CATEGORY_GENERAL, "General configuration");
-        ticksToLive = cfg.getInt("ticksbeforedecay", CATEGORY_GENERAL, ticksToLive, -1, 4320000,
-        		"How long (in ticks) before the block decays. Set to -1 to disable decay.");
+        ticksToLive = cfg.getInt("ticksbeforedecay", CATEGORY_GENERAL, ticksToLive, -1, Integer.MAX_VALUE,
+        		"How long (in ticks) before the Chunk Protector decays. Set to -1 to disable decay.");
         giveNewPlayersProtector = cfg.getBoolean("givenewplayerschunkprotector", CATEGORY_GENERAL, true,
         		"Set to true to give players a free Chunk Protector when first logging into a world.");
     }
+	
 	private static void initProtectionConfig(Configuration cfg) {
-		cfg.addCustomCategoryComment(CATEGORY_PROTECTION, "Protection configuration");
+		cfg.addCustomCategoryComment(CATEGORY_PROTECTION, "Chunk Protector configuration");
 		
 		enableMobProtection = cfg.getBoolean("enablemobprotection", CATEGORY_PROTECTION, true,
         		"Set to false to disable teleporting hostile mobs out of the protected area.");
@@ -54,5 +69,26 @@ public class Config {
         			"Set to false to disable calming hostile wolves in the protected area.");
         enableSlimeProtection = cfg.getBoolean("enableslimeprotection", CATEGORY_PROTECTION, true,
         			"Set to false to disable teleporting slimes out of the protected area.");
+	}
+	
+	private static void initAreaProtConfig(Configuration cfg) {
+		cfg.addCustomCategoryComment(CATEGORY_AREAPROTECTOR, "Area Protector configuration");
+		
+		areaProtectorX = cfg.getInt("areaprotectorx", CATEGORY_AREAPROTECTOR, 5, 1, 64, "Distance from the Area Protector to protect, along the x axis (total distance is 2*this+1)");
+		areaProtectorY = cfg.getInt("areaprotectory", CATEGORY_AREAPROTECTOR, 5, 1, 64, "Distance from the Area Protector to protect, along the y axis (total distance is 2*this+1)");
+		areaProtectorZ = cfg.getInt("areaprotectorz", CATEGORY_AREAPROTECTOR, 5, 1, 64, "Distance from the Area Protector to protect, along the z axis (total distance is 2*this+1)");
+		
+		enableMobProtectionAreaProtector = cfg.getBoolean("enablemobprotectionareaprotector", CATEGORY_AREAPROTECTOR, true,
+        		"Set to false to disable teleporting hostile mobs out of the protected area.");
+        enableArrowProtectionAreaProtector = cfg.getBoolean("enablearrowprotectionareaprotector", CATEGORY_AREAPROTECTOR, true,
+        			"Set to false to disable killing Skeleton arrows shot into the protected area.");
+        enablePotionProtectionAreaProtector = cfg.getBoolean("enablepotionprotectionareaprotector", CATEGORY_AREAPROTECTOR, true,
+        			"Set to false to disable blocking Witch potions from entering the protected area.");
+        enableWolfProtectionAreaProtector = cfg.getBoolean("enablewolfprotectionareaprotector", CATEGORY_AREAPROTECTOR, false,
+        			"Set to false to disable calming hostile wolves in the protected area.");
+        enableSlimeProtectionAreaProtector = cfg.getBoolean("enableslimeprotectionareaprotector", CATEGORY_AREAPROTECTOR, true,
+        			"Set to false to disable teleporting slimes out of the protected area.");
+        
+        enableAreaProtectorRecipe = cfg.getBoolean("enableareaprotectorrecipe", CATEGORY_AREAPROTECTOR, true, "Enables the crafting recipe for the Area Protector block.");
 	}
 }

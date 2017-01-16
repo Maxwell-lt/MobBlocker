@@ -34,6 +34,7 @@ public class MobBlocker {
     public void init(FMLInitializationEvent e) {
         proxy.init(e);
         MinecraftForge.EVENT_BUS.register(new LoginEventHandler());
+        ModRecipes.init();
     }
 
     @Mod.EventHandler
