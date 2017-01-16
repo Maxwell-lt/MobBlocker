@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "up": "mobblocker:blocks/areaprotectorblank",
+    "down": "mobblocker:blocks/areaprotectorblank",
+    "north": "mobblocker:blocks/areaprotectornorth",
+    "south": "mobblocker:blocks/areaprotectorsouth",
+    "east": "mobblocker:blocks/areaprotectoreast",
+    "west": "mobblocker:blocks/areaprotectorwest",
+    "particle": "mobblocker:blocks/areaprotectorblank"
+  }
+}
