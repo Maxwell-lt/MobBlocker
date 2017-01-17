@@ -14,7 +14,7 @@ public class MobBlocker {
 
     public static final String MODID = "mobblocker";
     public static final String MODNAME = "Mob Blocker";
-    public static final String MODVERSION = "1.0";
+    public static final String MODVERSION = "1.2.0";
 
     @SidedProxy(clientSide = "maxwell_lt.mobblocker.ClientProxy", serverSide = "maxwell_lt.mobblocker.ServerProxy")
     public static CommonProxy proxy;
