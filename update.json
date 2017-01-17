@@ -1,6 +1,7 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/mob-blocker/files",
   "1.10.2": {
+    "1.11.2-1.2.0": "Fixes #6, courtesy of @TheCodedOne",
     "1.11.2-1.1.0": "Adds the Area Protector; Fixed #9 and #10",
     "1.11.2-1.0.0": "Fixed #8",
     "1.11.2-1.0.0rc1.1": "Fixed #12",
@@ -8,6 +9,7 @@
     "1.11.2-0.1.0b": "Backported to 1.10.2"
   },
   "1.11.2" : {
+    "1.11.2-1.2.0": "Fixes #6, courtesy of @TheCodedOne",
     "1.11.2-1.1.0": "Adds the Area Protector; Fixed #9 and #10",
     "1.11.2-1.0.0": "Fixed #8",
     "1.11.2-1.0.0rc1.1": "Fixed #12",
@@ -16,7 +18,7 @@
     "1.11.2-0.0.0b": "Initial release"
   },
   "promos": {
-    "1.11.2-latest": "1.11.2-1.1.0",
-    "1.10.2-latest": "1.11.2-1.1.0"
+    "1.11.2-latest": "1.11.2-1.2.0",
+    "1.10.2-latest": "1.11.2-1.2.0"
   }
 }
