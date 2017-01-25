@@ -37,20 +37,18 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
         	setResistance(18000000);
         }
         GameRegistry.register(this);
-        GameRegistry.register(new ItemBlock(this), getRegistryName());
-        GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
-
-        new ItemBlock(ModBlocks.chunkProtector) {
+        GameRegistry.register(new ItemBlock(ModBlocks.chunkProtector) {
 			@Override
 			public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean adv) {
 				if (Config.ticksToLive != -1) {
-					addStringToTooltip("&5Good for: &4" + Config.ticksToLive + " &5ticks", list);
+					BlockChunkProtector.addStringToTooltip("&5Good for: &4" + Config.ticksToLive + " &5ticks", list);
 				}
 				else {
 					return;
 				}
 			}
-		};
+		}, getRegistryName());
+        GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
     }
     
     @SideOnly(Side.CLIENT)
@@ -80,7 +78,7 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
 		
 	}
 	
-	public void addStringToTooltip(String s, List<String> tooltip) {
+	public static void addStringToTooltip(String s, List<String> tooltip) {
 		tooltip.add(s.replaceAll("&", "\u00a7"));
 	}
 	

@@ -1,8 +1,13 @@
 package maxwell_lt.mobblocker;
 
 import maxwell_lt.mobblocker.blocks.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public final class ModBlocks {
 	
