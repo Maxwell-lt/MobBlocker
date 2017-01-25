@@ -37,7 +37,7 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
         	setResistance(18000000);
         }
         GameRegistry.register(this);
-        GameRegistry.register(new ItemBlock(ModBlocks.chunkProtector) {
+        GameRegistry.register(new ItemBlock(this) {
 			@Override
 			public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean adv) {
 				if (Config.ticksToLive != -1) {
@@ -47,7 +47,7 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
 					return;
 				}
 			}
-		}, getRegistryName());
+		}.setRegistryName(this.getRegistryName()));
         GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
     }
     
