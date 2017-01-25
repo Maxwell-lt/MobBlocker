@@ -4,6 +4,7 @@ import java.util.List;
 
 import maxwell_lt.mobblocker.Config;
 import maxwell_lt.mobblocker.MobBlocker;
+import maxwell_lt.mobblocker.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -38,6 +39,18 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
         GameRegistry.register(this);
         GameRegistry.register(new ItemBlock(this), getRegistryName());
         GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
+
+        new ItemBlock(ModBlocks.chunkProtector) {
+			@Override
+			public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean adv) {
+				if (Config.ticksToLive != -1) {
+					addStringToTooltip("&5Good for: &4" + Config.ticksToLive + " &5ticks", list);
+				}
+				else {
+					return;
+				}
+			}
+		};
     }
     
     @SideOnly(Side.CLIENT)
@@ -65,16 +78,6 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(DECAYLEVEL);
 		
-	}
-	
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean adv) {
-		if (Config.ticksToLive != -1) {
-			addStringToTooltip("&5Good for: &4" + Config.ticksToLive + " &5ticks", list);
-		}
-		else {
-			return;
-		}
 	}
 	
 	public void addStringToTooltip(String s, List<String> tooltip) {
