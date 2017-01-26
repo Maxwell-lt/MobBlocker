@@ -16,6 +16,8 @@ public class CommonProxy {
         Config.readConfig();
         
         ModBlocks.init();
+
+        MainCompatHandler.registerTOP();
     }
 
     public void init(FMLInitializationEvent e) {

@@ -4,8 +4,7 @@ import java.util.List;
 
 import maxwell_lt.mobblocker.Config;
 import maxwell_lt.mobblocker.MobBlocker;
-import maxwell_lt.mobblocker.ModBlocks;
-import mcjty.theoneprobe.api.IProbeInfoAccessor;
+import maxwell_lt.mobblocker.TOPInfoProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -23,11 +22,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
-import mcjty.theoneprobe.api.IProbeHitData;
 
-public class BlockChunkProtector extends Block implements ITileEntityProvider, IProbeInfoAccessor {
+public class BlockChunkProtector extends Block implements ITileEntityProvider, TOPInfoProvider {
 	
 	public static PropertyInteger DECAYLEVEL = PropertyInteger.create("decay", 0, 2);
     
