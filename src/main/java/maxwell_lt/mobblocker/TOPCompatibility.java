@@ -17,7 +17,7 @@ public class TOPCompatibility {
         if (registered)
             return;
         registered = true;
-        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "maxwell_lt.mobblocker.compat.top.TOPCompatibility$GetTheOneProbe");
+        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "maxwell_lt.mobblocker.TOPCompatibility$GetTheOneProbe");
     }
 
 
