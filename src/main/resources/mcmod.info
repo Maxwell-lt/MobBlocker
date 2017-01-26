@@ -4,7 +4,7 @@
     "name": "${name}",
     "description": "${description}",
     "version": "${version}",
-    "mcversion": "${mcversion}",
+    "mcversion": "1.11.2",
     "url": "${url}",
     "updateUrl": "${updatejson}",
     "authorList": ["${authors}"],

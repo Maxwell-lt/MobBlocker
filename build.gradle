@@ -14,7 +14,7 @@ ext.modid = "mobblocker"
 ext.modname = "Mob Blocker"
 ext.moddescription = "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights."
 ext.modauthors = "maxwell-lt"
-ext.modversion = "1.3.2"
+ext.modversion = "1.11.2" + '-' + "1.3.2"
 ext.modpackage = "maxwell_lt.mobblocker"
 ext.modarchive = "mobblocker"
 
@@ -26,7 +26,7 @@ ext.forgeversion = "13.20.0.2206"
 ext.mcpmappings = "snapshot_20161220"
 
 
-version = mcversion + '-' + modversion
+version = modversion
 group = modpackage // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = modarchive
 
@@ -95,14 +95,7 @@ processResources {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'modid':modid
-        expand 'name':modname
-        expand 'description':moddescription
-        expand 'authors':modauthors
-        expand 'version':modversion
-        expand 'mcversion':mcversion
-        expand 'url':url
-        expand 'updatejson':updatejson
+        expand 'modid':modid, 'name':modname, 'description':moddescription, 'authors':modauthors, 'version':modversion, 'url':url, 'updatejson':updatejson
     }
         
     // copy everything else except the mcmod.info
