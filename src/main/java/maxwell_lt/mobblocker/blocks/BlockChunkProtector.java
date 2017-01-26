@@ -4,7 +4,10 @@ import java.util.List;
 
 import maxwell_lt.mobblocker.Config;
 import maxwell_lt.mobblocker.MobBlocker;
-import maxwell_lt.mobblocker.ModBlocks;
+import maxwell_lt.mobblocker.TOPInfoProvider;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -17,13 +20,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockChunkProtector extends Block implements ITileEntityProvider {
+public class BlockChunkProtector extends Block implements ITileEntityProvider, TOPInfoProvider {
 	
 	public static PropertyInteger DECAYLEVEL = PropertyInteger.create("decay", 0, 2);
     
@@ -80,6 +84,18 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider {
 	
 	public static void addStringToTooltip(String s, List<String> tooltip) {
 		tooltip.add(s.replaceAll("&", "\u00a7"));
+	}
+
+
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+		TileEntity te = world.getTileEntity(data.getPos());
+		if (te instanceof TileEntityChunkProtector) {
+			TileEntityChunkProtector chunkprotector = (TileEntityChunkProtector) te;
+			int secondsLeft = chunkprotector.getSecondsBeforeDestroyed();
+			if (secondsLeft != -1) {
+				probeInfo.text(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
+			} else probeInfo.text(TextFormatting.GRAY + "Won't decay");
+		}
 	}
 	
 	

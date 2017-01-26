@@ -62,6 +62,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 				}
 			} else world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
 		}
+		markDirty();
 	}
 	
 	
@@ -151,5 +152,11 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
 	{
 	    return (oldState.getBlock() != newState.getBlock());
+	}
+
+	public int getSecondsBeforeDestroyed() {
+		if (Config.ticksToLive != -1) {
+			return (ticksBeforeDestroyed - ticksInWorld) / 20;
+		} else return -1;
 	}
 }
