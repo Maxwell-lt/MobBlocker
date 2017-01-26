@@ -95,7 +95,14 @@ processResources {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'modid':modid, 'name':modname, 'description':moddescription, 'authors':modauthors, 'version':modversion, 'mcversion':mcversion, 'url':url, 'updatejson':updatejson
+        expand 'modid':modid
+        expand 'name':modname
+        expand 'description':moddescription
+        expand 'authors':modauthors
+        expand 'version':modversion
+        expand 'mcversion':mcversion
+        expand 'url':url
+        expand 'updatejson':updatejson
     }
         
     // copy everything else except the mcmod.info
