@@ -10,8 +10,16 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
+//ext.modname = "Mob Blocker"
+//ext.moddescription = "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights."
+//ext.modauthors = "maxwell-lt"
+//ext.modversion = ""
+//ext.modpackage = "maxwell_lt.mobblocker"
 
-version = "1.11.2-1.3.0"
+//ext.mcversion = "1.11.2"
+
+
+version = "1.11.2-1.3.1"
 group = "maxwell_lt.mobblocker" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "mobblocker"
 

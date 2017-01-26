@@ -9,12 +9,13 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = MobBlocker.MODID, name = MobBlocker.MODNAME, version = MobBlocker.MODVERSION, useMetadata = true, acceptedMinecraftVersions = "[1.10,1.11.2]")
+@Mod(modid = MobBlocker.MODID, useMetadata = true,
+        acceptedMinecraftVersions = MobBlocker.MCVERSIONS, updateJSON = MobBlocker.UPDATEJSON)
 public class MobBlocker {
 
     public static final String MODID = "mobblocker";
-    public static final String MODNAME = "Mob Blocker";
-    public static final String MODVERSION = "1.3.0";
+    public static final String MCVERSIONS = "[1.10, 1.11.2]";
+    public static final String UPDATEJSON = "https://raw.githubusercontent.com/Maxwell-lt/MobBlocker/master/update.json";
 
     @SidedProxy(clientSide = "maxwell_lt.mobblocker.ClientProxy", serverSide = "maxwell_lt.mobblocker.ServerProxy")
     public static CommonProxy proxy;
