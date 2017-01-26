@@ -5,6 +5,9 @@ import java.util.List;
 import maxwell_lt.mobblocker.Config;
 import maxwell_lt.mobblocker.MobBlocker;
 import maxwell_lt.mobblocker.TOPInfoProvider;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -82,7 +85,7 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, T
 		tooltip.add(s.replaceAll("&", "\u00a7"));
 	}
 
-	@Override
+
 	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntity te = world.getTileEntity(data.getPos());
 		if (te instanceof TileEntityChunkProtector) {

@@ -1,6 +1,9 @@
 package maxwell_lt.mobblocker;
 
+import mcjty.theoneprobe.api.*;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import org.apache.logging.log4j.Level;
 
