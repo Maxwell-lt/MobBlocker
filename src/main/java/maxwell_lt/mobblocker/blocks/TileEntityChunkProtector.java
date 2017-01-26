@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -61,8 +62,9 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 					world.setBlockToAir(getPos());
 				}
 			} else world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
+
+			markDirty();
 		}
-		markDirty();
 	}
 	
 	
@@ -158,5 +160,18 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		if (Config.ticksToLive != -1) {
 			return (ticksBeforeDestroyed - ticksInWorld) / 20;
 		} else return -1;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		ticksInWorld = compound.getInteger("ticksInWorld");
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		compound.setInteger("ticksInWorld", ticksInWorld);
+		return compound;
 	}
 }
