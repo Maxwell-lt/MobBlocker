@@ -152,4 +152,10 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 	{
 	    return (oldState.getBlock() != newState.getBlock());
 	}
+
+	public int getSecondsBeforeDestroyed() {
+		if (Config.ticksToLive != -1) {
+			return (ticksBeforeDestroyed - ticksInWorld) / 20;
+		} else return -1;
+	}
 }
