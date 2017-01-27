@@ -92,16 +92,8 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, T
 		if (te instanceof TileEntityChunkProtector) {
 			TileEntityChunkProtector chunkprotector = (TileEntityChunkProtector) te;
 			int secondsLeft = chunkprotector.getSecondsBeforeDestroyed();
-			int ticksLeft = chunkprotector.getTicksBeforeDestroyed();
-			if (ticksLeft != -1) {
-				if (mode == ProbeMode.NORMAL) {
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
-				} else if (mode == ProbeMode.EXTENDED) {
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(ticksLeft) + " ticks left in world");
-				} else if (mode == ProbeMode.DEBUG) {
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(ticksLeft) + " ticks left in world");
-				}
+			if (secondsLeft != -1) {
+				probeInfo.text(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
 			} else probeInfo.text(TextFormatting.GRAY + "Won't decay");
 		}
 	}
