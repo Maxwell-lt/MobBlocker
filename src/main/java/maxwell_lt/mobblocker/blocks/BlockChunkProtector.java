@@ -111,6 +111,17 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, T
 
 	@Override
 	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+		TileEntity te = accessor.getTileEntity();
+		if (te instanceof TileEntityChunkProtector) {
+			TileEntityChunkProtector chunkprotector = (TileEntityChunkProtector) te;
+			int secondsLeft = chunkprotector.getSecondsBeforeDestroyed();
+			int ticksLeft = chunkprotector.getTicksBeforeDestroyed();
+			if (ticksLeft != -1) {
+				if (accessor.getPlayer().isSneaking()) {
+					currenttip.add(TextFormatting.BLUE + Integer.toString(ticksLeft) + " ticks left in world");
+				} else currenttip.add(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
+			} else currenttip.add(TextFormatting.GRAY + "Won't decay");
+		}
 		return currenttip;
 	}
 

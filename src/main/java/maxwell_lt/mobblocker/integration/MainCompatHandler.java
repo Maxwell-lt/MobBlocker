@@ -10,7 +10,7 @@ public class MainCompatHandler {
     }
 
     public static void registerWaila() {
-        if (Loader.isModLoaded("Waila")) {
+        if (Loader.isModLoaded("Waila") || Loader.isModLoaded("waila")) {
             WailaCompatibility.register();
         }
     }
