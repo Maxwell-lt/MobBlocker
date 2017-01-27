@@ -21,34 +21,34 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityChunkProtector extends TileEntity implements ITickable {
-	
+
 	// Used to get random teleportation coords:
 	Random rand;
-	
+
 	int ticksInWorld;
 	int ticksBeforeDestroyed;
-	
-	
+
+
 	public TileEntityChunkProtector() {
 		super();
 		this.rand = new Random();
-		
+
 		this.ticksInWorld = 0;
 		this.ticksBeforeDestroyed = Config.ticksToLive;
 	}
-	
+
 	@Override
 	public void update() {
-		
+
 		if (!world.isRemote) {
 			AxisAlignedBB chunkBounds = getChunk(getPos());
-			
+
 			if (Config.enableMobProtection) teleportMobs(chunkBounds);
 			if (Config.enableSlimeProtection) teleportSlimes(chunkBounds);
 			if (Config.enableArrowProtection) killArrows(chunkBounds);
 			if (Config.enablePotionProtection) killPotions(chunkBounds);
 			if (Config.enableWolfProtection) calmAngryWolves(chunkBounds);
-			
+
 			// Set metadata
 			this.ticksInWorld++;
 			if (ticksBeforeDestroyed != -1) {
@@ -66,31 +66,31 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			markDirty();
 		}
 	}
-	
-	
+
+
 	// Teleports every hostile mob in the chunk like endermen.
 	private void teleportMobs(AxisAlignedBB chunkBounds) {
 
 		// Gets a list of all the entities in the same chunk as this block
 		List<EntityMob> entityMobList =  world.getEntitiesWithinAABB(EntityMob.class, chunkBounds);
-		
+
 		for (EntityMob entity : entityMobList) {
 			teleport(entity);
 		}
 	}
-	
+
 	private void teleportSlimes(AxisAlignedBB chunkBounds) {
 		List<EntitySlime> entitySlimeList = world.getEntitiesWithinAABB(EntitySlime.class, chunkBounds);
 		for (EntitySlime entity : entitySlimeList) {
 			teleport(entity);
 		}
 	}
-	
+
 	private void killArrows(AxisAlignedBB chunkBounds) {
 		List<EntityArrow> list =  world.getEntitiesWithinAABB(EntityArrow.class, chunkBounds);
 		for (EntityArrow arrow : list) {
 			if (arrow.shootingEntity instanceof IRangedAttackMob) {
-				if (arrow.isBurning()) { 
+				if (arrow.isBurning()) {
 					arrow.setDead();
 				} else {
 					arrow.setFire(1);
@@ -99,7 +99,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			}
 		}
 	}
-	
+
 	private void killPotions(AxisAlignedBB chunkBounds) {
 		List<EntityPotion> list =  world.getEntitiesWithinAABB(EntityPotion.class, chunkBounds);
 		for (EntityPotion potion : list) {
@@ -108,7 +108,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			}
 		}
 	}
-	
+
 	// BROKEN
 	private void calmAngryWolves(AxisAlignedBB chunkBounds) {
 		// Currently broken, only the helper wolves are calmed.
@@ -121,44 +121,50 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			}
 		}
 	}
-	
+
 	private void teleport(EntityLivingBase entity) {
 		boolean moved = false; 	// Stores the status of teleportation attempts.
 		int counter = 0;		// Used to prevent infinite loops.
 		while (!moved) {
 			counter++;
 			if (counter > 10) break; // Breaks out of a possible infinite loop.
-			
+
 			// Implementation of Enderman random teleport code:
 			double newX = entity.posX + (this.rand.nextDouble() - 0.5D) * 64.0D;
 			double newY = entity.posY + (double)(this.rand.nextInt(64) - 32);
 			double newZ = entity.posZ + (this.rand.nextDouble() - 0.5D) * 64.0D;
 			moved = entity.attemptTeleport(newX, world.getTopSolidOrLiquidBlock(new BlockPos(newX, newY, newZ)).getY(), newZ);
 		}
-		
+
 		// Reset loop controllers:
 		counter = 0;
 		moved = false;
 	}
-	
+
 	// Returns an AxisAlignedBB that surrounds the entire chunk a given BlockPos is in.
 	private AxisAlignedBB getChunk(BlockPos blockpos) {
 		return new AxisAlignedBB(blockpos.getX() & ~0xF, 0,
 				blockpos.getZ() & ~0xF,
 				(blockpos.getX() & ~0xF) + 16, 256,
 				(blockpos.getZ() & ~0xF) + 16);
-		
+
 	}
-	
+
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
 	{
-	    return (oldState.getBlock() != newState.getBlock());
+		return (oldState.getBlock() != newState.getBlock());
 	}
 
 	public int getSecondsBeforeDestroyed() {
 		if (Config.ticksToLive != -1) {
 			return (ticksBeforeDestroyed - ticksInWorld) / 20;
+		} else return -1;
+	}
+
+	public int getTicksBeforeDestroyed() {
+		if (Config.ticksToLive != -1) {
+			return ticksBeforeDestroyed - ticksInWorld;
 		} else return -1;
 	}
 
