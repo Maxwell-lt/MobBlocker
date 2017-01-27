@@ -162,12 +162,6 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 		} else return -1;
 	}
 
-	public int getTicksBeforeDestroyed() {
-		if (Config.ticksToLive != -1) {
-			return ticksBeforeDestroyed - ticksInWorld;
-		} else return -1;
-	}
-
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
