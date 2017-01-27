@@ -50,8 +50,10 @@ public class WailaCompatibility implements IWailaDataProvider {
             return;
         registered = true;
         String mcVersion = Loader.instance().getMinecraftModContainer().getVersion();
-        if (mcVersion.substring(3,4).equals("0")) {
+        MobBlocker.logger.info(mcVersion);
+        if (mcVersion.equals("1.10.2")) {
             FMLInterModComms.sendMessage("Waila", "register", "maxwell_lt.mobblocker.integration.WailaCompatibility.load");
+            MobBlocker.logger.info("Sent IMC");
         } else FMLInterModComms.sendMessage("waila", "register", "maxwell_lt.mobblocker.integration.WailaCompatibility.load");
     }
 
