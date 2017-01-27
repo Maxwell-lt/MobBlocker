@@ -2,6 +2,7 @@ package maxwell_lt.mobblocker;
 
 import java.io.File;
 
+import maxwell_lt.mobblocker.integration.MainCompatHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -17,6 +18,7 @@ public class CommonProxy {
         
         ModBlocks.init();
 
+        MainCompatHandler.registerWaila();
         MainCompatHandler.registerTOP();
     }
 

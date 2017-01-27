@@ -4,10 +4,13 @@ import java.util.List;
 
 import maxwell_lt.mobblocker.Config;
 import maxwell_lt.mobblocker.MobBlocker;
-import maxwell_lt.mobblocker.TOPInfoProvider;
+import maxwell_lt.mobblocker.integration.TOPInfoProvider;
+import maxwell_lt.mobblocker.integration.WailaInfoProvider;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,7 +30,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockChunkProtector extends Block implements ITileEntityProvider, TOPInfoProvider {
+public class BlockChunkProtector extends Block implements ITileEntityProvider, TOPInfoProvider, WailaInfoProvider {
 
 	public static PropertyInteger DECAYLEVEL = PropertyInteger.create("decay", 0, 2);
 
@@ -104,6 +107,11 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, T
 				}
 			} else probeInfo.text(TextFormatting.GRAY + "Won't decay");
 		}
+	}
+
+	@Override
+	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+		return currenttip;
 	}
 
 
