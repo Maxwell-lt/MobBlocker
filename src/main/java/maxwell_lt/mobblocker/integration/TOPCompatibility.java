@@ -1,5 +1,6 @@
-package maxwell_lt.mobblocker;
+package maxwell_lt.mobblocker.integration;
 
+import maxwell_lt.mobblocker.MobBlocker;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +18,7 @@ public class TOPCompatibility {
         if (registered)
             return;
         registered = true;
-        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "maxwell_lt.mobblocker.TOPCompatibility$GetTheOneProbe");
+        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "maxwell_lt.mobblocker.integration.TOPCompatibility$GetTheOneProbe");
     }
 
 

@@ -1,4 +1,4 @@
-package maxwell_lt.mobblocker;
+package maxwell_lt.mobblocker.integration;
 
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
