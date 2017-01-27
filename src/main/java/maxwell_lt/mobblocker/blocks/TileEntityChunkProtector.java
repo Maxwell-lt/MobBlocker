@@ -68,7 +68,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 			} else world.setBlockState(getPos(), world.getBlockState(getPos()).withProperty(BlockChunkProtector.DECAYLEVEL, 0));
 
 			markDirty();
-			IBlockState currState = world.getBlockState(getPos())
+			IBlockState currState = world.getBlockState(getPos());
 			world.notifyBlockUpdate(getPos(), currState, currState, 0);
 		}
 	}
