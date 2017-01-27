@@ -29,7 +29,7 @@ public class WailaCompatibility implements IWailaDataProvider {
     private static boolean loaded;
 
     public static void load(IWailaRegistrar registrar) {
-        System.out.println("WailaCompatibility.load");
+        MobBlocker.logger.info("WailaCompatibility.load");
         if (!registered){
             throw new RuntimeException("Please register this handler using the provided method.");
         }
@@ -50,7 +50,7 @@ public class WailaCompatibility implements IWailaDataProvider {
             return;
         registered = true;
         String mcVersion = Loader.instance().getMinecraftModContainer().getVersion();
-        if (mcVersion.substring(3,4) == "0") {
+        if (mcVersion.substring(3,4).equals("0")) {
             FMLInterModComms.sendMessage("Waila", "register", "maxwell_lt.mobblocker.integration.WailaCompatibility.load");
         } else FMLInterModComms.sendMessage("waila", "register", "maxwell_lt.mobblocker.integration.WailaCompatibility.load");
     }
