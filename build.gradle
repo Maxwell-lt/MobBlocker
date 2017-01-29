@@ -14,7 +14,7 @@ ext.modid = "mobblocker"
 ext.modname = "Mob Blocker"
 ext.moddescription = "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights."
 ext.modauthors = "maxwell-lt"
-ext.modversion = "1.11.2" + '-' + "1.4.0"
+ext.modversion = "1.11.2" + '-' + "1.4.1"
 ext.modpackage = "maxwell_lt.mobblocker"
 ext.modarchive = "mobblocker"
 

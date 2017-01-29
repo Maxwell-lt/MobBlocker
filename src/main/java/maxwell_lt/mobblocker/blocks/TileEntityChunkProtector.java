@@ -100,7 +100,7 @@ public class TileEntityChunkProtector extends TileEntity implements ITickable {
 					arrow.setDead();
 				} else {
 					arrow.setFire(1);
-					arrow.setVelocity(0, 0, 0);
+					arrow.addVelocity(-arrow.motionX, 0, -arrow.motionZ);
 				}
 			}
 		}
