@@ -76,7 +76,6 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
             currenttip.add(TextFormatting.YELLOW + "    Y" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(yrange));
             currenttip.add(TextFormatting.YELLOW + "    Z" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(zrange));
         }
-        MobBlocker.logger.info("Added info");
         return currenttip;
     }
 }
