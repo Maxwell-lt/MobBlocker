@@ -9,6 +9,13 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+/**
+ * Entry point to the mod
+ * Manages mod metadata
+ * Sets up proxies
+ * Initializes logger
+ * Handles preinit, init, and postinit steps
+ */
 @Mod(modid = MobBlocker.MODID, useMetadata = true,
         acceptedMinecraftVersions = MobBlocker.MCVERSIONS, updateJSON = MobBlocker.UPDATEJSON)
 public class MobBlocker {

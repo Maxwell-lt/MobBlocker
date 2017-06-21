@@ -6,6 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+/**
+ * Initializes custom recipes
+ */
 public class ModRecipes {
 	
 	public static void init() {

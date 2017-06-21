@@ -34,7 +34,7 @@ public class TOPCompatibility {
             probe.registerProvider(new IProbeInfoProvider() {
                 @Override
                 public String getID() {
-                    return "modtut:default";
+                    return "mobblocker:default";
                 }
 
                 @Override

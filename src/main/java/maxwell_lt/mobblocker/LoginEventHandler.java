@@ -7,6 +7,9 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+/**
+ * Handles gifting players ChunkProtectors upon first spawn
+ */
 @Mod.EventBusSubscriber
 public class LoginEventHandler {
 	

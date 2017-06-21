@@ -28,8 +28,20 @@ import net.minecraft.block.ITileEntityProvider;
 
 import java.util.List;
 
+/**
+ * Block class for the Area Protector block
+ *
+ * The purpose of this block is to teleport hostile mobs away from the area in which it is placed.
+ * @see TileEntityAreaProtector
+ */
 public class BlockAreaProtector extends Block implements ITileEntityProvider, TOPInfoProvider, WailaInfoProvider {
 
+    /**
+     * Constructor for the BlockAreaProtector class
+     *
+     * This method handles initializing the block and adding it to the GameRegistry.
+     * This contructor is only called once per game launch.
+     */
     public BlockAreaProtector() {
         super(Material.ROCK);
         setUnlocalizedName(MobBlocker.MODID + ".areaprotector");
@@ -46,11 +58,26 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
                 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
+    /**
+     * Overridden method to return the TileEntity for this block
+     * @param worldIn World instance for current world
+     * @param meta Metadata value
+     * @return Returns a new instance of {@link TileEntityAreaProtector}
+     */
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileEntityAreaProtector();
     }
 
+    /**
+     * Called by TOP compatibility handler
+     * @param mode
+     * @param probeInfo
+     * @param player
+     * @param world
+     * @param blockState
+     * @param data
+     */
     public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
         TileEntity te = world.getTileEntity(data.getPos());
         if (te instanceof TileEntityAreaProtector) {
@@ -64,6 +91,14 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
         }
     }
 
+    /**
+     * Called by WAILA/HWYLA compatibility handler
+     * @param itemStack
+     * @param currenttip
+     * @param accessor
+     * @param config
+     * @return
+     */
     @Override
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         TileEntity te = accessor.getTileEntity();

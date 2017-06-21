@@ -9,6 +9,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+/**
+ * Initializes blocks
+ */
 public final class ModBlocks {
 	
 	public static BlockChunkProtector chunkProtector;
