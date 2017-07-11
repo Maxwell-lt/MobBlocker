@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#PE",
+    "BDG",
+    "EN#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "P": {
+      "item": "minecraft:potion"
+    },
+    "E": {
+      "item": "minecraft:end_stone"
+    },
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "N": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "mobblocker:areaprotector",
+    "count": 1
+  }
+}
