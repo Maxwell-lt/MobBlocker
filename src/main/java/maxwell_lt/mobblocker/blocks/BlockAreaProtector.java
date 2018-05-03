@@ -49,7 +49,7 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
         setHardness(1.5F);
         // GameRegistry.register(this);
         // GameRegistry.register(new ItemBlock(this), getRegistryName());
-        // GameRegistry.registerTileEntity(TileEntityAreaProtector.class, MobBlocker.MODID + "_areaprotector");
+        GameRegistry.registerTileEntity(TileEntityAreaProtector.class, MobBlocker.MODID + "_areaprotector");
     }
 
     @SideOnly(Side.CLIENT)
