@@ -1,6 +1,7 @@
 package maxwell_lt.mobblocker;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -9,6 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * Calls initialization for {@link CommonProxy}
  * Additionally initializes block models and other client-side-only graphical features
  */
+@Mod.EventBusSubscriber
 public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent e) {

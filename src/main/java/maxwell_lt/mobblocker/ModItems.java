@@ -20,5 +20,6 @@ public class ModItems {
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         blockChunkProtector.initModel();
+        blockAreaProtector.initModel();
     }
 }

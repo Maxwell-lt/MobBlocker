@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class MobBlocker {
 
     public static final String MODID = "mobblocker";
-    public static final String MCVERSIONS = "[1.10, 1.12]";
+    public static final String MCVERSIONS = "[1.12, 1.12.2]";
     public static final String UPDATEJSON = "https://raw.githubusercontent.com/Maxwell-lt/MobBlocker/master/update.json";
 
     @SidedProxy(clientSide = "maxwell_lt.mobblocker.ClientProxy", serverSide = "maxwell_lt.mobblocker.ServerProxy")
