@@ -27,7 +27,11 @@
     "1.11.2-0.1.0b": "Backported to 1.10.2",
     "1.11.2-0.0.0b": "Initial release"
   },
+  "1.12.2": {
+    "1.12.2-1.5.0": "Ported to 1.12.2, works with any 1.12.x version. Closes #35"
+  },
   "promos": {
+    "1.12.2-latest": "1.12.2-1.5.0",
     "1.11.2-latest": "1.11.2-1.4.1",
     "1.10.2-latest": "1.11.2-1.4.1"
   }

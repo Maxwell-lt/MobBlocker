@@ -4,7 +4,7 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -14,16 +14,16 @@ ext.modid = "mobblocker"
 ext.modname = "Mob Blocker"
 ext.moddescription = "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights."
 ext.modauthors = "maxwell-lt"
-ext.modversion = "1.11.2" + '-' + "1.4.1"
+ext.modversion = "1.12" + '-' + "1.5.0"
 ext.modpackage = "maxwell_lt.mobblocker"
 ext.modarchive = "mobblocker"
 
 ext.url = "https://www.github.com/Maxwell-lt/MobBlocker"
 ext.updatejson = "https://raw.githubusercontent.com/Maxwell-lt/MobBlocker/master/update.json"
 
-ext.mcversion = "1.11.2"
-ext.forgeversion = "13.20.0.2206"
-ext.mcpmappings = "snapshot_20161220"
+ext.mcversion = "1.12"
+ext.forgeversion = "14.21.1.2406"
+ext.mcpmappings = "snapshot_20170624"
 
 
 version = modversion
@@ -60,13 +60,17 @@ repositories {
         url "http://tehnut.info/maven"
     }
 
+    maven { // RedstoneFlux, for an unknown reason
+        url "http://maven.covers1624.net"
+    }
+
 }
 
 dependencies {
 
-    deobfCompile "mcjty.theoneprobe:TheOneProbe:1.1x-1.4.0-50"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.11-5"
     deobfCompile "com.github.mcjty:compatlayer:1.11-0.1.6"
-    deobfCompile "mcp.mobius.waila:Hwyla:1.8.7-B21_1.11"
+    deobfCompile "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"

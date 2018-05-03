@@ -47,9 +47,9 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
         setUnlocalizedName(MobBlocker.MODID + ".areaprotector");
         setRegistryName("areaprotector");
         setHardness(1.5F);
-        GameRegistry.register(this);
-        GameRegistry.register(new ItemBlock(this), getRegistryName());
-        GameRegistry.registerTileEntity(TileEntityAreaProtector.class, MobBlocker.MODID + "_areaprotector");
+        // GameRegistry.register(this);
+        // GameRegistry.register(new ItemBlock(this), getRegistryName());
+        // GameRegistry.registerTileEntity(TileEntityAreaProtector.class, MobBlocker.MODID + "_areaprotector");
     }
 
     @SideOnly(Side.CLIENT)

@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * The purpose of this block is to teleport hostile mobs away from the chunk in which it is placed.
  * @see TileEntityChunkProtector
  */
-public class BlockChunkProtector extends Block implements ITileEntityProvider, TOPInfoProvider, WailaInfoProvider {
+public class BlockChunkProtector extends Block implements ITileEntityProvider, /*TOPInfoProvider,*/ WailaInfoProvider {
 
 	public static PropertyInteger DECAYLEVEL = PropertyInteger.create("decay", 0, 2);
 
@@ -60,11 +60,11 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, T
 		}
 
 		// Register block to GameRegistry
-		GameRegistry.register(this);
+		// GameRegistry.register(this);
 
 		// Create anonymous class for the item form of this block
 		// This allows the addition of custom tooltips that show how long the block will last in world once placed.
-		GameRegistry.register(new ItemBlock(this) {
+		/* GameRegistry.register(new ItemBlock(this) {
 			@Override
 			public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean adv) {
 				// Only add tooltips if decay is enabled
@@ -75,7 +75,7 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, T
 					return;
 				}
 			}
-		}.setRegistryName(this.getRegistryName()));
+		}.setRegistryName(this.getRegistryName())); */
 		// Registers TileEntity associated with this block
 		GameRegistry.registerTileEntity(TileEntityChunkProtector.class, MobBlocker.MODID + "_chunkprotector");
 	}

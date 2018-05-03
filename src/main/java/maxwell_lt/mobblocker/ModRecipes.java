@@ -1,4 +1,6 @@
+/*
 package maxwell_lt.mobblocker;
+
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -8,7 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Initializes custom recipes
- */
+ * /
 public class ModRecipes {
 	
 	public static void init() {
@@ -26,3 +28,5 @@ public class ModRecipes {
 	}
 	
 }
+
+*/
