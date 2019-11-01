@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
@@ -30,7 +31,13 @@ public class BlockChunkProtector extends Block /*implements ITileEntityProvider,
 	 */
 	public BlockChunkProtector() {
 		super(Properties.create(Material.ROCK).hardnessAndResistance(Config.TICKS_TO_LIVE.get() != -1 ? -1.0F : 1.5F, 18000000));
+		this.setDefaultState(this.getStateContainer().getBaseState().with(DECAYLEVEL, 0));
 		setRegistryName("chunkprotector");
+	}
+
+	@Override
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(DECAYLEVEL);
 	}
 
 	@Override

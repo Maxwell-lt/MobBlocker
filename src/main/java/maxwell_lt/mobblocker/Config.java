@@ -5,7 +5,6 @@ import com.electronwill.nightconfig.core.io.WritingMode;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
-import org.apache.logging.log4j.Level;
 
 import java.nio.file.Path;
 
@@ -20,9 +19,9 @@ public class Config {
 	private static final String CATEGORY_PROTECTION = "protection";
 	private static final String CATEGORY_AREAPROTECTOR = "areaprotector";
 
-	private static final ForgeConfigSpec.Builder GENERAL_BUILDER = new ForgeConfigSpec.Builder();
-	private static final ForgeConfigSpec.Builder PROTECTION_BUILDER = new ForgeConfigSpec.Builder();
-	private static final ForgeConfigSpec.Builder AREAPROTECTOR_BUILDER = new ForgeConfigSpec.Builder();
+	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+
+	public static ForgeConfigSpec COMMON_CONFIG;
 
 	public static ForgeConfigSpec.IntValue TICKS_TO_LIVE;
 	
@@ -47,27 +46,29 @@ public class Config {
 	public static ForgeConfigSpec.BooleanValue ENABLE_AREA_PROTECTOR_RECIPE;
 
 	static {
-		GENERAL_BUILDER.comment("General Configuration").push(CATEGORY_GENERAL);
+		COMMON_BUILDER.comment("General Configuration").push(CATEGORY_GENERAL);
 		initGeneralConfig();
-		GENERAL_BUILDER.pop();
+		COMMON_BUILDER.pop();
 
-		PROTECTION_BUILDER.comment("Chunk Protector Configuration");
+		COMMON_BUILDER.comment("Chunk Protector Configuration").push(CATEGORY_PROTECTION);
 		initProtectionConfig();
-		PROTECTION_BUILDER.pop();
+		COMMON_BUILDER.pop();
 
-		AREAPROTECTOR_BUILDER.comment("Area Protector Configuration");
+		COMMON_BUILDER.comment("Area Protector Configuration").push(CATEGORY_AREAPROTECTOR);
 		initAreaProtConfig();
-		PROTECTION_BUILDER.pop();
+		COMMON_BUILDER.pop();
+
+		COMMON_CONFIG = COMMON_BUILDER.build();
 	}
 
 	/**
 	 * Adds configuration entries to the General category of the config file
 	 */
 	private static void initGeneralConfig() {
-		TICKS_TO_LIVE = GENERAL_BUILDER
+		TICKS_TO_LIVE = COMMON_BUILDER
 				.comment("How long (in ticks) before the Chunk Protector decays. Set to -1 to disable decay.")
 				.defineInRange("ticksbeforedecay", 72000, -1, Integer.MAX_VALUE);
-		GIVE_NEW_PLAYERS_PROTECTOR = GENERAL_BUILDER
+		GIVE_NEW_PLAYERS_PROTECTOR = COMMON_BUILDER
 				.comment("Set to true to give players a free Chunk Protector when first logging into a world.")
 				.define("givenewplayerschunkprotector", true);
     }
@@ -76,19 +77,19 @@ public class Config {
 	 * Adds configuration entries to the Protection category of the config file
 	 */
 	private static void initProtectionConfig() {
-		ENABLE_MOB_PROTECTION = PROTECTION_BUILDER
+		ENABLE_MOB_PROTECTION = COMMON_BUILDER
 				.comment("Set to false to disable teleporting hostile mobs out of the protected area.")
 				.define("enablemobprotection", true);
-		ENABLE_ARROW_PROTECTION = PROTECTION_BUILDER
+		ENABLE_ARROW_PROTECTION = COMMON_BUILDER
 				.comment("Set to false to disable killing Skeleton arrows shot into the protected area.")
 				.define("enablearrowprotection", true);
-		ENABLE_POTION_PROTECTION = PROTECTION_BUILDER
+		ENABLE_POTION_PROTECTION = COMMON_BUILDER
 				.comment("Set to false to disable blocking Witch potions from entering the protected area.")
 				.define("enablepotionprotection", true);
-		ENABLE_WOLF_PROTECTION = PROTECTION_BUILDER
+		ENABLE_WOLF_PROTECTION = COMMON_BUILDER
 				.comment("Set to false to disable calming hostile wolves in the protected area.")
 				.define("enablewolfprotection", false);
-		ENABLE_SLIME_PROTECTION = PROTECTION_BUILDER
+		ENABLE_SLIME_PROTECTION = COMMON_BUILDER
 				.comment("Set to false to disable teleporting slimes out of the protected area.")
 				.define("enableslimeprotection", true);
 	}
@@ -97,31 +98,31 @@ public class Config {
 	 * Adds configuration entries to the AreaProt category of the config file
 	 */
 	private static void initAreaProtConfig() {
-		AREA_PROTECTOR_X = AREAPROTECTOR_BUILDER
+		AREA_PROTECTOR_X = COMMON_BUILDER
 				.comment("Distance from the Area Protector to protect, along the x axis (total distance is 2*this+1)")
 				.defineInRange("areaprotectorx", 5, 1, 64);
-		AREA_PROTECTOR_Y = AREAPROTECTOR_BUILDER
+		AREA_PROTECTOR_Y = COMMON_BUILDER
 				.comment("Distance from the Area Protector to protect, along the y axis (total distance is 2*this+1)")
 				.defineInRange("areaprotectorx", 5, 1, 64);
-		AREA_PROTECTOR_Z = AREAPROTECTOR_BUILDER
+		AREA_PROTECTOR_Z = COMMON_BUILDER
 				.comment("Distance from the Area Protector to protect, along the z axis (total distance is 2*this+1)")
 				.defineInRange("areaprotectorx", 5, 1, 64);
-		ENABLE_MOB_PROTECTION_AREA_PROTECTOR = AREAPROTECTOR_BUILDER
+		ENABLE_MOB_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable teleporting hostile mobs out of the protected area.")
 				.define("enablemobprotectionareaprotector", true);
-		ENABLE_ARROW_PROTECTION_AREA_PROTECTOR = AREAPROTECTOR_BUILDER
+		ENABLE_ARROW_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable killing Skeleton arrows shot into the protected area.")
 				.define("enablearrowprotectionareaprotector", true);
-		ENABLE_POTION_PROTECTION_AREA_PROTECTOR = AREAPROTECTOR_BUILDER
+		ENABLE_POTION_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable blocking Witch potions from entering the protected area.")
 				.define("enablepotionprotectionareaprotector", true);
-		ENABLE_WOLF_PROTECTION_AREA_PROTECTOR = AREAPROTECTOR_BUILDER
+		ENABLE_WOLF_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable calming hostile wolves in the protected area.")
 				.define("enablewolfprotectionareaprotector", false);
-		ENABLE_SLIME_PROTECTION_AREA_PROTECTOR = AREAPROTECTOR_BUILDER
+		ENABLE_SLIME_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable teleporting slimes out of the protected area.")
 				.define("enableslimeprotectionareaprotector", true);
-		ENABLE_AREA_PROTECTOR_RECIPE = AREAPROTECTOR_BUILDER
+		ENABLE_AREA_PROTECTOR_RECIPE = COMMON_BUILDER
 				.comment("Enables the crafting recipe for the Area Protector block.")
 				.define("enableareaprotectorrecipe", true);
 	}
