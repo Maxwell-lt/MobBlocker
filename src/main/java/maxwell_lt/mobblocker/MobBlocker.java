@@ -1,13 +1,16 @@
 package maxwell_lt.mobblocker;
 
-import org.apache.logging.log4j.Logger;
-
+import maxwell_lt.mobblocker.proxy.IProxy;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Entry point to the mod
@@ -16,15 +19,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * Initializes logger
  * Handles preinit, init, and postinit steps
  */
-@Mod(modid = MobBlocker.MODID, useMetadata = true,
-        acceptedMinecraftVersions = MobBlocker.MCVERSIONS, updateJSON = MobBlocker.UPDATEJSON)
+@Mod(MobBlocker.MODID)
 public class MobBlocker {
 
     public static final String MODID = "mobblocker";
     public static final String MCVERSIONS = "[1.12, 1.12.2]";
     public static final String UPDATEJSON = "https://raw.githubusercontent.com/Maxwell-lt/MobBlocker/master/update.json";
 
-    @SidedProxy(clientSide = "maxwell_lt.mobblocker.ClientProxy", serverSide = "maxwell_lt.mobblocker.ServerProxy")
+    public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static CommonProxy proxy;
 
     @Mod.Instance
