@@ -1,32 +1,10 @@
 package maxwell_lt.mobblocker.blocks;
 
-import maxwell_lt.mobblocker.Config;
-import maxwell_lt.mobblocker.MobBlocker;
-import maxwell_lt.mobblocker.integration.TOPInfoProvider;
-import maxwell_lt.mobblocker.integration.WailaInfoProvider;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.ProbeMode;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
-
-import java.util.List;
 
 /**
  * Block class for the Area Protector block
@@ -34,7 +12,7 @@ import java.util.List;
  * The purpose of this block is to teleport hostile mobs away from the area in which it is placed.
  * @see TileEntityAreaProtector
  */
-public class BlockAreaProtector extends Block implements ITileEntityProvider, TOPInfoProvider, WailaInfoProvider {
+public class BlockAreaProtector extends Block /*implements ITileEntityProvider, TOPInfoProvider, WailaInfoProvider*/ {
 
     /**
      * Constructor for the BlockAreaProtector class
@@ -43,29 +21,23 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
      * This contructor is only called once per game launch.
      */
     public BlockAreaProtector() {
-        super(Material.ROCK);
-        setUnlocalizedName(MobBlocker.MODID + ".areaprotector");
+        super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 6000));
         setRegistryName("areaprotector");
-        setHardness(1.5F);
-        // GameRegistry.register(this);
-        // GameRegistry.register(new ItemBlock(this), getRegistryName());
-        GameRegistry.registerTileEntity(TileEntityAreaProtector.class, MobBlocker.MODID + "_areaprotector");
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this),
-                0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
 
     /**
      * Overridden method to return the TileEntity for this block
-     * @param worldIn World instance for current world
-     * @param meta Metadata value
+     * @param world World instance for current world
+     * @param state Metadata value
      * @return Returns a new instance of {@link TileEntityAreaProtector}
      */
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new TileEntityAreaProtector();
     }
 
@@ -78,7 +50,7 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
      * @param blockState
      * @param data
      */
-    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+    /*public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
         TileEntity te = world.getTileEntity(data.getPos());
         if (te instanceof TileEntityAreaProtector) {
             int xrange = Config.areaProtectorX;
@@ -89,7 +61,7 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
             probeInfo.text(TextFormatting.YELLOW + "    Y" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(yrange));
             probeInfo.text(TextFormatting.YELLOW + "    Z" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(zrange));
         }
-    }
+    }*/
 
     /**
      * Called by WAILA/HWYLA compatibility handler
@@ -99,7 +71,7 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
      * @param config
      * @return
      */
-    @Override
+    /*@Override
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         TileEntity te = accessor.getTileEntity();
         if (te instanceof TileEntityAreaProtector) {
@@ -112,5 +84,5 @@ public class BlockAreaProtector extends Block implements ITileEntityProvider, TO
             currenttip.add(TextFormatting.YELLOW + "    Z" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(zrange));
         }
         return currenttip;
-    }
+    }*/
 }

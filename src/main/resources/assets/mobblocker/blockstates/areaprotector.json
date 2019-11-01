@@ -4,7 +4,6 @@
     "model": "mobblocker:areaprotector"
   },
     "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "": { "model":  "mobblocker:block/areaprotector" }
   }
 }
