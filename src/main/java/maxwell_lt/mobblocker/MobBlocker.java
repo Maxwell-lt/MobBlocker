@@ -35,13 +35,9 @@ import org.apache.logging.log4j.Logger;
 public class MobBlocker {
 
     public static final String MODID = "mobblocker";
-    public static final String MCVERSIONS = "[1.14]";
-    public static final String UPDATEJSON = "https://raw.githubusercontent.com/Maxwell-lt/MobBlocker/master/update.json";
 
     public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
     public static ModSetup setup = new ModSetup();
-
-    public static Logger logger = LogManager.getLogger();
 
     public MobBlocker() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);

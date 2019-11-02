@@ -5,7 +5,14 @@ authors="maxwell_lt"
 [[mods]]
 modId="mobblocker"
 version="${file.jarVersion}"
+updateJSONURL="https://raw.githubusercontent.com/Maxwell-lt/MobBlocker/master/update.json"
 displayName="MobBlocker"
 description='''
 Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights.
 '''
+[[dependencies.mobblocker]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"
