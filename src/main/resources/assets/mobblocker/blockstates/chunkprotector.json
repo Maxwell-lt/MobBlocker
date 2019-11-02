@@ -6,15 +6,15 @@
   "variants": {
     "decay": {
     	"0": {
-    		"model": "mobblocker:chunkprotector"
+    		"model": "mobblocker:block/chunkprotector"
     	},
     	
     	"1": {
-    		"model": "mobblocker:chunkprotectordecay1"
+    		"model": "mobblocker:block/chunkprotectordecay1"
     	},
     	
     	"2": {
-    		"model": "mobblocker:chunkprotectordecay2"
+    		"model": "mobblocker:block/chunkprotectordecay2"
     	}
     }
   }

@@ -1,0 +1,10 @@
+{
+    "block.mobblocker.chunkprotector": "Chunk Protector",
+    "block.mobblocker.areaprotector": "Area Protector",
+
+    "mobblocker.secondsremaining": "%s seconds left in world",
+    "mobblocker.ticksremaining": "%s ticks left in world",
+    "mobblocker.areaprotectorx": "    §eX range§r = §a%sm",
+    "mobblocker.areaprotectory": "    §eY range§r = §a%sm",
+    "mobblocker.areaprotectorz": "    §eZ range§r = §a%sm"
+}

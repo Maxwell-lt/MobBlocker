@@ -1,0 +1,11 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="https://github.com/Maxwell-lt/MobBlocker/issues"
+authors="maxwell_lt"
+[[mods]]
+modId="mobblocker"
+version="${file.jarVersion}"
+displayName="MobBlocker"
+description='''
+Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights.
+'''

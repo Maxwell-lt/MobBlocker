@@ -1,39 +1,44 @@
 package maxwell_lt.mobblocker;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Handles gifting players ChunkProtectors upon first spawn
  */
 @Mod.EventBusSubscriber
 public class LoginEventHandler {
-	
+
+	public static Logger logger = LogManager.getLogger();
+
 	@SubscribeEvent
-	public void onPlayerJoinWorld(EntityJoinWorldEvent event) {
-		if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer && Config.giveNewPlayersProtector) {
-			EntityPlayer player = (EntityPlayer) event.getEntity();
-			NBTTagCompound persistentTag;
-			if (player.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-				persistentTag = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+	public static void onPlayerJoinWorld(EntityJoinWorldEvent event) {
+		if (!event.getWorld().isRemote && event.getEntity() instanceof PlayerEntity && Config.GIVE_NEW_PLAYERS_PROTECTOR.get()) {
+			PlayerEntity player = (PlayerEntity) event.getEntity();
+			CompoundNBT persistentTag;
+			if (player.getPersistentData().contains(PlayerEntity.PERSISTED_NBT_TAG)) {
+				persistentTag = player.getPersistentData().getCompound(PlayerEntity.PERSISTED_NBT_TAG);
 			} else {
-				persistentTag = new NBTTagCompound();
-				player.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, persistentTag);
+				persistentTag = new CompoundNBT();
+				player.getPersistentData().put(PlayerEntity.PERSISTED_NBT_TAG, persistentTag);
 			}
-			NBTTagCompound tag;
-			if (persistentTag.hasKey("mobblocker")) {
-				tag = persistentTag.getCompoundTag("mobblocker");
+			CompoundNBT tag;
+			if (persistentTag.contains("mobblocker")) {
+				tag = persistentTag.getCompound("mobblocker");
 			} else {
-				tag = new NBTTagCompound();
-				persistentTag.setTag("mobblocker", tag);
+				tag = new CompoundNBT();
+				persistentTag.put("mobblocker", tag);
 			}
 			if (!tag.getBoolean("receivedprotector")) {
-				player.inventory.addItemStackToInventory(new ItemStack(ModBlocks.chunkProtector));
-				tag.setBoolean("receivedprotector", true);
+				player.inventory.addItemStackToInventory(new ItemStack(ModBlocks.CHUNKPROTECTOR));
+				tag.putBoolean("receivedprotector", true);
 			}
 		}
 	}
