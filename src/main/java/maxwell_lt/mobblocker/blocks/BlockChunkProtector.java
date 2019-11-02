@@ -2,14 +2,16 @@ package maxwell_lt.mobblocker.blocks;
 
 import java.util.List;
 
-import maxwell_lt.mobblocker.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -19,7 +21,7 @@ import javax.annotation.Nullable;
  * The purpose of this block is to teleport hostile mobs away from the chunk in which it is placed.
  * @see TileEntityChunkProtector
  */
-public class BlockChunkProtector extends Block /*implements ITileEntityProvider, /*TOPInfoProvider, WailaInfoProvider*/ {
+public class BlockChunkProtector extends Block {
 
 	public static IntegerProperty DECAYLEVEL = IntegerProperty.create("decay", 0, 2);
 
@@ -30,7 +32,7 @@ public class BlockChunkProtector extends Block /*implements ITileEntityProvider,
 	 * This contructor is only called once per game launch.
 	 */
 	public BlockChunkProtector() {
-		super(Properties.create(Material.ROCK).hardnessAndResistance(Config.TICKS_TO_LIVE.get() != -1 ? -1.0F : 1.5F, 18000000));
+		super(Properties.create(Material.ROCK).hardnessAndResistance(1.5F, 18000000));
 		this.setDefaultState(this.getStateContainer().getBaseState().with(DECAYLEVEL, 0));
 		setRegistryName("chunkprotector");
 	}
@@ -75,7 +77,7 @@ public class BlockChunkProtector extends Block /*implements ITileEntityProvider,
 	 * @param blockState
 	 * @param data
 	 */
-	/*public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+	/*public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, IBlockState blockState, IProbeHitData data) {
 		TileEntity te = world.getTileEntity(data.getPos());
 		if (te instanceof TileEntityChunkProtector) {
 			TileEntityChunkProtector chunkprotector = (TileEntityChunkProtector) te;
@@ -93,30 +95,4 @@ public class BlockChunkProtector extends Block /*implements ITileEntityProvider,
 			} else probeInfo.text(TextFormatting.GRAY + "Won't decay");
 		}
 	}*/
-
-	/**
-	 * Called by WAILA/HWYLA compatibility handler
-	 * @param itemStack
-	 * @param currenttip
-	 * @param accessor
-	 * @param config
-	 * @return
-	 */
-	/*@Override
-	public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-		TileEntity te = accessor.getTileEntity();
-		if (te instanceof TileEntityChunkProtector) {
-			TileEntityChunkProtector chunkprotector = (TileEntityChunkProtector) te;
-			int secondsLeft = chunkprotector.getSecondsBeforeDestroyed();
-			int ticksLeft = chunkprotector.getTicksBeforeDestroyed();
-			if (ticksLeft != -1) {
-				if (accessor.getPlayer().isSneaking()) {
-					currenttip.add(TextFormatting.BLUE + Integer.toString(ticksLeft) + " ticks left in world");
-				} else currenttip.add(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
-			} else currenttip.add(TextFormatting.GRAY + "Won't decay");
-		}
-		return currenttip;
-	}*/
-
-
 }

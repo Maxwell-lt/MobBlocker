@@ -7,15 +7,20 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Handles gifting players ChunkProtectors upon first spawn
  */
 @Mod.EventBusSubscriber
 public class LoginEventHandler {
 
+	public static Logger logger = LogManager.getLogger();
+
 	@SubscribeEvent
-	public void onPlayerJoinWorld(EntityJoinWorldEvent event) {
-		if (!event.getEntity().world.isRemote && event.getEntity() instanceof PlayerEntity && Config.GIVE_NEW_PLAYERS_PROTECTOR.get()) {
+	public static void onPlayerJoinWorld(EntityJoinWorldEvent event) {
+		if (!event.getWorld().isRemote && event.getEntity() instanceof PlayerEntity && Config.GIVE_NEW_PLAYERS_PROTECTOR.get()) {
 			PlayerEntity player = (PlayerEntity) event.getEntity();
 			CompoundNBT persistentTag;
 			if (player.getPersistentData().contains(PlayerEntity.PERSISTED_NBT_TAG)) {

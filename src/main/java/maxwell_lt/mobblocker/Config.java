@@ -103,10 +103,10 @@ public class Config {
 				.defineInRange("areaprotectorx", 5, 1, 64);
 		AREA_PROTECTOR_Y = COMMON_BUILDER
 				.comment("Distance from the Area Protector to protect, along the y axis (total distance is 2*this+1)")
-				.defineInRange("areaprotectorx", 5, 1, 64);
+				.defineInRange("areaprotectory", 5, 1, 64);
 		AREA_PROTECTOR_Z = COMMON_BUILDER
 				.comment("Distance from the Area Protector to protect, along the z axis (total distance is 2*this+1)")
-				.defineInRange("areaprotectorx", 5, 1, 64);
+				.defineInRange("areaprotectorz", 5, 1, 64);
 		ENABLE_MOB_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable teleporting hostile mobs out of the protected area.")
 				.define("enablemobprotectionareaprotector", true);

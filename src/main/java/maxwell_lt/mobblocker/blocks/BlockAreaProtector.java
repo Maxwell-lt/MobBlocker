@@ -62,27 +62,4 @@ public class BlockAreaProtector extends Block /*implements ITileEntityProvider, 
             probeInfo.text(TextFormatting.YELLOW + "    Z" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(zrange));
         }
     }*/
-
-    /**
-     * Called by WAILA/HWYLA compatibility handler
-     * @param itemStack
-     * @param currenttip
-     * @param accessor
-     * @param config
-     * @return
-     */
-    /*@Override
-    public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        TileEntity te = accessor.getTileEntity();
-        if (te instanceof TileEntityAreaProtector) {
-            int xrange = Config.areaProtectorX;
-            int yrange = Config.areaProtectorY;
-            int zrange = Config.areaProtectorZ;
-            currenttip.add(TextFormatting.BOLD + "Range:");
-            currenttip.add(TextFormatting.YELLOW + "    X" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(xrange));
-            currenttip.add(TextFormatting.YELLOW + "    Y" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(yrange));
-            currenttip.add(TextFormatting.YELLOW + "    Z" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(zrange));
-        }
-        return currenttip;
-    }*/
 }
