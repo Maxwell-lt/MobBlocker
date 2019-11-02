@@ -16,8 +16,6 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber
 public class LoginEventHandler {
 
-	public static Logger logger = LogManager.getLogger();
-
 	@SubscribeEvent
 	public static void onPlayerJoinWorld(EntityJoinWorldEvent event) {
 		if (!event.getWorld().isRemote && event.getEntity() instanceof PlayerEntity && Config.GIVE_NEW_PLAYERS_PROTECTOR.get()) {
