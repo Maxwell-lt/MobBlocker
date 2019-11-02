@@ -56,8 +56,9 @@ public class BlockChunkProtector extends Block implements ITileEntityProvider, /
 		if (Config.ticksToLive != -1) setBlockUnbreakable();
 		else {
 			setHardness(1.5F);
-			setResistance(18000000);
 		}
+
+		setResistance(18000000);
 
 		// Register block to GameRegistry
 		// GameRegistry.register(this);
