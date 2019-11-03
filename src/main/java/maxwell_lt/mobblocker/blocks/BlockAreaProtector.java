@@ -1,10 +1,20 @@
 package maxwell_lt.mobblocker.blocks;
 
+import maxwell_lt.mobblocker.Config;
+import maxwell_lt.mobblocker.integration.TOPInfoProvider;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.IProbeInfoAccessor;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.block.Block;
+import net.minecraft.world.World;
 
 /**
  * Block class for the Area Protector block
@@ -12,7 +22,7 @@ import net.minecraft.block.Block;
  * The purpose of this block is to teleport hostile mobs away from the area in which it is placed.
  * @see TileEntityAreaProtector
  */
-public class BlockAreaProtector extends Block /*implements ITileEntityProvider, TOPInfoProvider, WailaInfoProvider*/ {
+public class BlockAreaProtector extends Block implements TOPInfoProvider {
 
     /**
      * Constructor for the BlockAreaProtector class
@@ -41,25 +51,15 @@ public class BlockAreaProtector extends Block /*implements ITileEntityProvider, 
         return new TileEntityAreaProtector();
     }
 
-    /**
-     * Called by TOP compatibility handler
-     * @param mode
-     * @param probeInfo
-     * @param player
-     * @param world
-     * @param blockState
-     * @param data
-     */
-    /*public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
         TileEntity te = world.getTileEntity(data.getPos());
         if (te instanceof TileEntityAreaProtector) {
-            int xrange = Config.areaProtectorX;
-            int yrange = Config.areaProtectorY;
-            int zrange = Config.areaProtectorZ;
-            probeInfo.text(TextFormatting.BOLD + "Range:");
-            probeInfo.text(TextFormatting.YELLOW + "    X" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(xrange));
-            probeInfo.text(TextFormatting.YELLOW + "    Y" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(yrange));
-            probeInfo.text(TextFormatting.YELLOW + "    Z" + TextFormatting.RESET + " = " + TextFormatting.GREEN + "±" + Integer.toString(zrange));
+            int xrange = Config.AREA_PROTECTOR_X.get();
+            int yrange = Config.AREA_PROTECTOR_Y.get();
+            int zrange = Config.AREA_PROTECTOR_Z.get();
+            probeInfo.text(new TranslationTextComponent("mobblocker.areaprotectorx", xrange).getFormattedText());
+            probeInfo.text(new TranslationTextComponent("mobblocker.areaprotectory", yrange).getFormattedText());
+            probeInfo.text(new TranslationTextComponent("mobblocker.areaprotectorz", zrange).getFormattedText());
         }
-    }*/
+    }
 }

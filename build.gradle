@@ -17,7 +17,7 @@ ext.modid = "mobblocker"
 ext.modname = "Mob Blocker"
 ext.moddescription = "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights."
 ext.modauthors = "maxwell-lt"
-ext.modversion = "1.14" + '-' + "2.0-alpha2"
+ext.modversion = "1.14" + '-' + "2.0-alpha3"
 ext.modpackage = "maxwell_lt.mobblocker"
 ext.modarchive = "mobblocker"
 
@@ -114,7 +114,9 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.14.4-28.1.79'
 
     compile fg.deobf(project.dependencies.create("mcp.mobius.waila:Hwyla:1.10.6-B67_1.14.4"))
-    //compile fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-1.14:1.14-1.4.37-12"))
+    compile fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-1.14:1.14-1.4.37-12") {
+        transitive = false
+    })
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"

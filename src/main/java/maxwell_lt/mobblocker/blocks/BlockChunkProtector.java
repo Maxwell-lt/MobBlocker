@@ -1,7 +1,10 @@
 package maxwell_lt.mobblocker.blocks;
 
 import java.util.List;
+import java.util.concurrent.TransferQueue;
 
+import maxwell_lt.mobblocker.integration.TOPInfoProvider;
+import mcjty.theoneprobe.api.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -10,6 +13,7 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -21,7 +25,7 @@ import javax.annotation.Nullable;
  * The purpose of this block is to teleport hostile mobs away from the chunk in which it is placed.
  * @see TileEntityChunkProtector
  */
-public class BlockChunkProtector extends Block {
+public class BlockChunkProtector extends Block implements TOPInfoProvider {
 
 	public static IntegerProperty DECAYLEVEL = IntegerProperty.create("decay", 0, 2);
 
@@ -68,16 +72,8 @@ public class BlockChunkProtector extends Block {
 		tooltip.add(s.replaceAll("&", "\u00a7"));
 	}
 
-	/**
-	 * Called by TOP compatibility handler
-	 * @param mode
-	 * @param probeInfo
-	 * @param player
-	 * @param world
-	 * @param blockState
-	 * @param data
-	 */
-	/*public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, IBlockState blockState, IProbeHitData data) {
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
 		TileEntity te = world.getTileEntity(data.getPos());
 		if (te instanceof TileEntityChunkProtector) {
 			TileEntityChunkProtector chunkprotector = (TileEntityChunkProtector) te;
@@ -85,14 +81,14 @@ public class BlockChunkProtector extends Block {
 			int ticksLeft = chunkprotector.getTicksBeforeDestroyed();
 			if (ticksLeft != -1) {
 				if (mode == ProbeMode.NORMAL) {
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
+					probeInfo.text(new TranslationTextComponent("mobblocker.secondsremaining", secondsLeft).getFormattedText());
 				} else if (mode == ProbeMode.EXTENDED) {
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(ticksLeft) + " ticks left in world");
+					probeInfo.text(new TranslationTextComponent("mobblocker.ticksremaining", ticksLeft).getFormattedText());
 				} else if (mode == ProbeMode.DEBUG) {
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(secondsLeft) + " seconds left in world");
-					probeInfo.text(TextFormatting.BLUE + Integer.toString(ticksLeft) + " ticks left in world");
+					probeInfo.text(new TranslationTextComponent("mobblocker.secondsremaining", secondsLeft).getFormattedText());
+					probeInfo.text(new TranslationTextComponent("mobblocker.ticksremaining", ticksLeft).getFormattedText());
 				}
-			} else probeInfo.text(TextFormatting.GRAY + "Won't decay");
+			} else probeInfo.text(new TranslationTextComponent("mobblocker.wontdecay").getFormattedText());
 		}
-	}*/
+	}
 }

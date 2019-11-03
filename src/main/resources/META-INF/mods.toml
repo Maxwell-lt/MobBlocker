@@ -10,6 +10,7 @@ displayName="MobBlocker"
 description='''
 Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights.
 '''
+credits="Thanks to TheCodedOne for textures!"
 [[dependencies.mobblocker]]
     modId="minecraft"
     mandatory=true

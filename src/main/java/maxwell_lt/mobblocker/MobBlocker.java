@@ -3,6 +3,7 @@ package maxwell_lt.mobblocker;
 import maxwell_lt.mobblocker.blocks.BlockAreaProtector;
 import maxwell_lt.mobblocker.blocks.BlockChunkProtector;
 import maxwell_lt.mobblocker.blocks.TileEntityChunkProtector;
+import maxwell_lt.mobblocker.integration.TOPCompatHandler;
 import maxwell_lt.mobblocker.setup.ClientProxy;
 import maxwell_lt.mobblocker.setup.IProxy;
 import maxwell_lt.mobblocker.setup.ModSetup;
@@ -50,6 +51,7 @@ public class MobBlocker {
     private void setup(final FMLCommonSetupEvent e) {
         setup.init();
         proxy.init();
+        TOPCompatHandler.registerTOP();
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
