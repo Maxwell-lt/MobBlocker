@@ -24,6 +24,12 @@ public class ChunkProtectorWailaPlugin implements IWailaPlugin, IComponentProvid
     public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
         int[] stats = accessor.getServerData().getIntArray("chunkprotector_stats");
         if (stats.length != 2) return;
+
+        if (stats[0] == -1) {
+            tooltip.add(new TranslationTextComponent("mobblocker.wontdecay"));
+            return;
+        }
+
         if (accessor.getPlayer().isSneaking()) {
             tooltip.add(new TranslationTextComponent("mobblocker.ticksremaining", stats[0]));
         } else {

@@ -43,10 +43,12 @@ public class MobBlocker {
 
     public MobBlocker() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve("mobblocker-common.toml"));
+        Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve("mobblocker-client.toml"));
     }
 
     private void setup(final FMLCommonSetupEvent e) {

@@ -74,8 +74,8 @@ public class TileEntityChunkProtector extends TileEntity implements ITickableTil
 			BlockState currState = world.getBlockState(getPos());
 			world.notifyBlockUpdate(getPos(), currState, currState, 0);
 		} else {
-			if (world.getDayTime() % 20 == 0) {
-				ParticleBoxHandler.drawBox(chunkBounds, world, 0, 0, 1);
+			if (Config.ENABLE_PARTICLE_BOX.get() && world.getDayTime() % 20 == 0) {
+				ParticleBoxHandler.drawBox(chunkBounds, world, 0.2F, 0.416F, 0.616F);
 			}
 		}
 	}

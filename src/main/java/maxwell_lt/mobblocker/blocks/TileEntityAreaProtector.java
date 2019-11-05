@@ -40,9 +40,9 @@ public class TileEntityAreaProtector extends TileEntity implements ITickableTile
 			if (Config.ENABLE_POTION_PROTECTION_AREA_PROTECTOR.get()) MobRemovalHandler.killPotions(areaBounds, world);
 			if (Config.ENABLE_WOLF_PROTECTION_AREA_PROTECTOR.get()) MobRemovalHandler.calmAngryWolves(areaBounds, world);
 		} else {
-			if (world.getDayTime() % 20 == 0) {
+			if (Config.ENABLE_PARTICLE_BOX.get() && world.getDayTime() % 20 == 0) {
 				AxisAlignedBB areaBounds = getArea(getPos());
-				ParticleBoxHandler.drawBox(areaBounds, world, 1, 0, 0);
+				ParticleBoxHandler.drawBox(areaBounds, world, 0.624F, 0.192F, 0.192F);
 			}
 		}
 	}

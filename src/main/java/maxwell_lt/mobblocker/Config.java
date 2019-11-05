@@ -18,10 +18,13 @@ public class Config {
 	private static final String CATEGORY_GENERAL = "general";
 	private static final String CATEGORY_PROTECTION = "protection";
 	private static final String CATEGORY_AREAPROTECTOR = "areaprotector";
+	private static final String CATEGORY_RENDERING = "rendering";
 
 	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+	private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 
 	public static ForgeConfigSpec COMMON_CONFIG;
+	public static ForgeConfigSpec CLIENT_CONFIG;
 
 	public static ForgeConfigSpec.IntValue TICKS_TO_LIVE;
 	
@@ -45,6 +48,8 @@ public class Config {
 	
 	public static ForgeConfigSpec.BooleanValue ENABLE_AREA_PROTECTOR_RECIPE;
 
+	public static ForgeConfigSpec.BooleanValue ENABLE_PARTICLE_BOX;
+
 	static {
 		COMMON_BUILDER.comment("General Configuration").push(CATEGORY_GENERAL);
 		initGeneralConfig();
@@ -59,6 +64,18 @@ public class Config {
 		COMMON_BUILDER.pop();
 
 		COMMON_CONFIG = COMMON_BUILDER.build();
+
+		CLIENT_BUILDER.comment("Rendering Configuration").push(CATEGORY_RENDERING);
+		initRenderingConfig();
+		CLIENT_BUILDER.pop();
+
+		CLIENT_CONFIG = CLIENT_BUILDER.build();
+	}
+
+	private static void initRenderingConfig() {
+		ENABLE_PARTICLE_BOX = CLIENT_BUILDER
+				.comment("Set to true to enable showing bounds of the Chunk Protector and Area Protector in world.\nSetting to true may impact performance.")
+				.define("enablerenderingboundingbox", true);
 	}
 
 	/**
