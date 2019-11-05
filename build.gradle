@@ -17,7 +17,7 @@ ext.modid = "mobblocker"
 ext.modname = "Mob Blocker"
 ext.moddescription = "Allows each player to protect a single chunk from hostile mobs, to help out during the first few nights."
 ext.modauthors = "maxwell-lt"
-ext.modversion = "1.14" + '-' + "2.0-alpha3"
+ext.modversion = "1.14" + '-' + "2.0"
 ext.modpackage = "maxwell_lt.mobblocker"
 ext.modarchive = "mobblocker"
 
@@ -48,7 +48,7 @@ minecraft {
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
@@ -64,7 +64,7 @@ minecraft {
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
@@ -80,7 +80,7 @@ minecraft {
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
