@@ -1,10 +1,11 @@
-package maxwell_lt.mobblocker;
+package maxwell_lt.mobblocker.handler;
 
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.entity.monster.WitchEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PotionEntity;
@@ -16,7 +17,7 @@ import net.minecraft.world.gen.Heightmap;
 import java.util.List;
 import java.util.Random;
 
-public class BlockMobs {
+public class MobRemovalHandler {
     private static Random rand = new Random();
     /**
      * Calls this.teleport on all mobs deriving from EntityMob
@@ -28,7 +29,9 @@ public class BlockMobs {
         List<MobEntity> entityMobList =  world.getEntitiesWithinAABB(MobEntity.class, areaBounds);
 
         for (MobEntity entity : entityMobList) {
-            teleport(entity, world);
+            if (!(entity instanceof TameableEntity)) {
+                teleport(entity, world);
+            }
         }
     }
 
@@ -54,12 +57,13 @@ public class BlockMobs {
     public static void killArrows(AxisAlignedBB areaBounds, World world) {
         List<ArrowEntity> list =  world.getEntitiesWithinAABB(ArrowEntity.class, areaBounds);
         for (ArrowEntity arrow : list) {
-            if (true /*arrow.shootingEntity instanceof IRangedAttackMob*/) {
+            if (arrow.getShooter() instanceof IRangedAttackMob) {
                 if (arrow.isBurning()) {
                     arrow.remove();
                 } else {
                     arrow.setFire(1);
                     arrow.setVelocity(0, 0, 0);
+                    arrow.setDamage(0);
                 }
             }
         }
@@ -90,9 +94,7 @@ public class BlockMobs {
         List<WolfEntity> list =  world.getEntitiesWithinAABB(WolfEntity.class, areaBounds);
         for (WolfEntity wolf : list) {
             if (wolf.isAngry()) {
-                wolf.setAttackTarget(null);
-                wolf.setRevengeTarget(null);
-                wolf.setAngry(false);
+                teleport(wolf, world);
             }
         }
     }
