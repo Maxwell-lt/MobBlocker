@@ -104,8 +104,8 @@ public class Config {
 				.comment("Set to false to disable blocking Witch potions from entering the protected area.")
 				.define("enablepotionprotection", true);
 		ENABLE_WOLF_PROTECTION = COMMON_BUILDER
-				.comment("Set to false to disable calming hostile wolves in the protected area.")
-				.define("enablewolfprotection", false);
+				.comment("Set to false to disable removing hostile wolves from the protected area.")
+				.define("enablewolfprotection", true);
 		ENABLE_SLIME_PROTECTION = COMMON_BUILDER
 				.comment("Set to false to disable teleporting slimes out of the protected area.")
 				.define("enableslimeprotection", true);
@@ -134,8 +134,8 @@ public class Config {
 				.comment("Set to false to disable blocking Witch potions from entering the protected area.")
 				.define("enablepotionprotectionareaprotector", true);
 		ENABLE_WOLF_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
-				.comment("Set to false to disable calming hostile wolves in the protected area.")
-				.define("enablewolfprotectionareaprotector", false);
+				.comment("Set to false to disable removing hostile wolves from the protected area.")
+				.define("enablewolfprotectionareaprotector", true);
 		ENABLE_SLIME_PROTECTION_AREA_PROTECTOR = COMMON_BUILDER
 				.comment("Set to false to disable teleporting slimes out of the protected area.")
 				.define("enableslimeprotectionareaprotector", true);
