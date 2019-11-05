@@ -2,6 +2,7 @@ package maxwell_lt.mobblocker;
 
 import maxwell_lt.mobblocker.blocks.BlockAreaProtector;
 import maxwell_lt.mobblocker.blocks.BlockChunkProtector;
+import maxwell_lt.mobblocker.blocks.TileEntityAreaProtector;
 import maxwell_lt.mobblocker.blocks.TileEntityChunkProtector;
 import maxwell_lt.mobblocker.integration.TOPCompatHandler;
 import maxwell_lt.mobblocker.setup.ClientProxy;
@@ -71,7 +72,7 @@ public class MobBlocker {
         @SubscribeEvent
         public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
             event.getRegistry().register(TileEntityType.Builder.create(TileEntityChunkProtector::new, ModBlocks.CHUNKPROTECTOR).build(null).setRegistryName("chunkprotector"));
-            event.getRegistry().register(TileEntityType.Builder.create(TileEntityChunkProtector::new, ModBlocks.AREAPROTECTOR).build(null).setRegistryName("areaprotector"));
+            event.getRegistry().register(TileEntityType.Builder.create(TileEntityAreaProtector::new, ModBlocks.AREAPROTECTOR).build(null).setRegistryName("areaprotector"));
         }
     }
 }
