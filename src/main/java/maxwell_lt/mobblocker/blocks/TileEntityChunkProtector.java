@@ -1,8 +1,8 @@
 package maxwell_lt.mobblocker.blocks;
 
-import java.util.Random;
-import maxwell_lt.mobblocker.BlockMobs;
+import maxwell_lt.mobblocker.handler.MobRemovalHandler;
 import maxwell_lt.mobblocker.Config;
+import maxwell_lt.mobblocker.particle.ParticleBoxHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
@@ -12,7 +12,6 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import static maxwell_lt.mobblocker.ModBlocks.CHUNKPROTECTOR_TILE;
 
@@ -46,15 +45,13 @@ public class TileEntityChunkProtector extends TileEntity implements ITickableTil
 	 */
 	@Override
 	public void tick() {
-
+		AxisAlignedBB chunkBounds = getChunk(getPos());
 		if (!world.isRemote) {
-			AxisAlignedBB chunkBounds = getChunk(getPos());
-
-			if (Config.ENABLE_MOB_PROTECTION.get()) BlockMobs.teleportMobs(chunkBounds, world);
-			if (Config.ENABLE_SLIME_PROTECTION.get()) BlockMobs.teleportSlimes(chunkBounds, world);
-			if (Config.ENABLE_ARROW_PROTECTION.get()) BlockMobs.killArrows(chunkBounds, world);
-			if (Config.ENABLE_POTION_PROTECTION.get()) BlockMobs.killPotions(chunkBounds, world);
-			if (Config.ENABLE_WOLF_PROTECTION.get()) BlockMobs.calmAngryWolves(chunkBounds, world);
+			if (Config.ENABLE_MOB_PROTECTION.get()) MobRemovalHandler.teleportMobs(chunkBounds, world);
+			if (Config.ENABLE_SLIME_PROTECTION.get()) MobRemovalHandler.teleportSlimes(chunkBounds, world);
+			if (Config.ENABLE_ARROW_PROTECTION.get()) MobRemovalHandler.killArrows(chunkBounds, world);
+			if (Config.ENABLE_POTION_PROTECTION.get()) MobRemovalHandler.killPotions(chunkBounds, world);
+			if (Config.ENABLE_WOLF_PROTECTION.get()) MobRemovalHandler.calmAngryWolves(chunkBounds, world);
 
 			// Handles decay mechanics of this block, if enabled in the config file
 			// Sets the visual decay indicator based on which approximate third of the block's total lifetime the block has lived for
@@ -76,6 +73,10 @@ public class TileEntityChunkProtector extends TileEntity implements ITickableTil
 			markDirty();
 			BlockState currState = world.getBlockState(getPos());
 			world.notifyBlockUpdate(getPos(), currState, currState, 0);
+		} else {
+			if (world.getDayTime() % 20 == 0) {
+				ParticleBoxHandler.drawBox(chunkBounds, world, 0, 0, 1);
+			}
 		}
 	}
 
